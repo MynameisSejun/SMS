@@ -8,6 +8,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import cse.sms.model.Student;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -129,13 +134,40 @@ public class StudentInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
         String filePath = "studentInfo.txt";
         Student student = new Student(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+      /*  try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
             String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum;
             writer.write(studentInfo);
             writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
+        }*/
+        boolean idCheck = true;
+        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] userInfo = line.split(",");
+                String storedID = userInfo[0];
+                
+                if(sNum.getText().equals(storedID)) {
+                    idCheck = false;
+                }
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        if(idCheck) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+                String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
+                String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum;
+                writer.write(studentInfo);
+                writer.newLine();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "중복된 학생 번호가 있습니다.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
