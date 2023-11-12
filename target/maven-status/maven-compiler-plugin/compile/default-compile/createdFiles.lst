@@ -1,4 +1,8 @@
+cse\sms\view\ProfessorInfo$2.class
+cse\sms\view\StudentInfo$2.class
+cse\sms\view\ProfessorInfo$1.class
+cse\sms\view\ProfessorInfo.class
 cse\sms\model\Student.class
 cse\sms\view\StudentInfo$1.class
 cse\sms\view\StudentInfo.class
-cse\sms\view\StudentInfo$2.class
+cse\sms\model\Professor.class
