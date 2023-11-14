@@ -10,8 +10,6 @@ import java.io.IOException;
 import cse.sms.model.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 /**
@@ -134,15 +132,15 @@ public class StudentInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
         String filePath = "studentInfo.txt";
         Student student = new Student(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
-      /*  try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
-            String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum;
-            writer.write(studentInfo);
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+      
         boolean idCheck = true;
+        boolean emptyCheck = false;
+        
+        /* emptyCheck = student.emptycheck(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
+            if(emptyCheck == false) {
+                JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 입력을 마저 해주세요");
+            }*/ //빈칸 체크 어떻게할지 잘 모르겠어요.
+            
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
             while((line = br.readLine()) != null) {
@@ -161,8 +159,14 @@ public class StudentInfo extends javax.swing.JFrame {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                 String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
                 String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum;
+               
                 writer.write(studentInfo);
                 writer.newLine();
+                JOptionPane.showMessageDialog(null, "저장되었습니다!");
+                dispose();
+                SchoolManager_FirstPage sf = new SchoolManager_FirstPage();
+                sf.setVisible(true);
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }

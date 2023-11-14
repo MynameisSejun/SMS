@@ -22,6 +22,18 @@ public class Student {
         this.secretNum = secretNum;
         this.secretNum2 = secretNum2;
     }
+    
+    public boolean emptycheck(String name, String studentId, String major, String secretNum, String secretNum2) { //정보 저장할 때 빈칸 체크할려고 만들긴 햇는데 안돌아가는듯
+        String[] check = {name, studentId, major, secretNum, secretNum2};
+        boolean isEmpty = false;
+        for(int i = 0; i < check.length; i++) {
+            if(check[i].isEmpty()) {
+                isEmpty = true;
+                break;
+            }
+        }
+        return isEmpty;
+    }
 
     public String getName() {
         return name;

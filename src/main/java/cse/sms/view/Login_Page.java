@@ -185,8 +185,9 @@ public class Login_Page extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //학생 페이지 창 띄우기
                     Student_FirstPage St = new Student_FirstPage(); // 매개변수로 학생 정보 넘겨야 할 듯
-                    St.setVisible(true);    
+                    St.setVisible(true);
                     setVisible(false); // 이전 창 안 보이게 함
+                    dispose(); // 창 끄게 하는건데 넣어야 하나??,,,
                     break;
                 }else if(num == 2){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
@@ -208,8 +209,23 @@ public class Login_Page extends javax.swing.JFrame {
                 
             case 'G':
                 //수업 관리자 화면이랑 정보저장 만들어야함
+                
             case 'H':
                 //학사 관리자 화면이랑 정보저장 만들어야함
+                file = "schoolmanagerInfo.txt";
+                num = checknum.LC(file, ID, PW);
+                if(num == 1) {
+                    JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
+                    SchoolManager_FirstPage sf = new SchoolManager_FirstPage();
+                    sf.setVisible(true);
+                    setVisible(false);
+                    break;
+                    //교수 페이지 창 띄우기 -> 교수 페이지 만들어야함
+                }else if(num == 2){
+                    JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
+                }else {
+                    JOptionPane.showMessageDialog(null, "아이디가 일치하지 않습니다."); // 로그인 실패 -> 아이디 불일치
+                }
         }  
         
     }//GEN-LAST:event_LOGIN_BUTTActionPerformed
