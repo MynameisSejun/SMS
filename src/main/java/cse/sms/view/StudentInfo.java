@@ -134,12 +134,12 @@ public class StudentInfo extends javax.swing.JFrame {
         Student student = new Student(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
       
         boolean idCheck = true;
-        boolean emptyCheck = false;
+        boolean emptyCheck = true;
         
-        /* emptyCheck = student.emptycheck(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
-            if(emptyCheck == false) {
-                JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 입력을 마저 해주세요");
-            }*/ //빈칸 체크 어떻게할지 잘 모르겠어요.
+        emptyCheck = student.emptycheck(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
+        //    if(emptyCheck == true) {
+        //        JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 입력을 마저 해주세요");
+        //    } //빈칸 체크 어떻게할지 잘 모르겠어요.
             
         try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
@@ -155,23 +155,27 @@ public class StudentInfo extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        if(idCheck) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-                String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
-                String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum;
-               
-                writer.write(studentInfo);
-                writer.newLine();
-                JOptionPane.showMessageDialog(null, "저장되었습니다!");
-                dispose();
-                SchoolManager_FirstPage sf = new SchoolManager_FirstPage();
-                sf.setVisible(true);
-                
-            } catch (IOException e) {
-                e.printStackTrace();
+        if(emptyCheck) {
+            if(idCheck) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+                    String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
+                    String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum;
+                    //if (check == false) 
+                    writer.write(studentInfo);
+                    writer.newLine();
+                    JOptionPane.showMessageDialog(null, "저장되었습니다!");
+                    //else if(check == true) 빈칸 있음
+                    dispose();
+                    SchoolManager_FirstPage sf = new SchoolManager_FirstPage();
+                    sf.setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "중복된 학생 번호가 있습니다.");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "중복된 학생 번호가 있습니다.");
+        }else {
+            JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
