@@ -188,6 +188,7 @@ public class Login_Page extends javax.swing.JFrame {
                     St.setVisible(true);
                     setVisible(false); // 이전 창 안 보이게 함
                     dispose(); // 창 끄게 하는건데 넣어야 하나??,,,
+                    
                     break;
                 }else if(num == 2){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
