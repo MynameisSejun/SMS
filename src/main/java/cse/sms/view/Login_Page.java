@@ -4,7 +4,7 @@
  */
 package cse.sms.view;
 
-import cse.sms.control.LoginCheck;
+import cse.sms.control.Check;
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
 import java.io.File;
@@ -172,14 +172,14 @@ public class Login_Page extends javax.swing.JFrame {
         //txt파일에 들어가는 내용은 아이디,비밀번호 로 입력해야함
         String ID = ID_INPUT.getText(); // 입력한 ID
         String PW = new String(PW_INPUT.getPassword()); // 입력한 PW        Jpasswordfield는 이렇게 받아야함.
-        LoginCheck checknum = new LoginCheck();
+        Check checknum = new Check();
         char first_munja = ID_INPUT.getText().charAt(0); // 첫 번째 글자 판별 후 페이지 이동
         int num;
         
         switch (first_munja) {
             case 'S':
                 String file = "StudentInfo.txt";
-                num = checknum.LC(file, ID, PW);
+                num = checknum.loginCheck(file, ID, PW);
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //학생 페이지 창 띄우기
@@ -196,7 +196,7 @@ public class Login_Page extends javax.swing.JFrame {
                 
             case 'P':
                 file = "professorInfo.txt";
-                num = checknum.LC(file, ID, PW);
+                num = checknum.loginCheck(file, ID, PW);
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //교수 페이지 창 띄우기 -> 교수 페이지 만들어야함
@@ -212,7 +212,7 @@ public class Login_Page extends javax.swing.JFrame {
             case 'H':
                 //학사 관리자 화면이랑 정보저장 만들어야함
                 file = "schoolmanagerInfo.txt";
-                num = checknum.LC(file, ID, PW);
+                num = checknum.loginCheck(file, ID, PW);
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     SM_FirstPage sf = new SM_FirstPage();
