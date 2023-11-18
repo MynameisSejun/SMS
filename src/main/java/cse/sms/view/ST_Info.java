@@ -11,17 +11,18 @@ import cse.sms.model.Student;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import javax.swing.JOptionPane;
+import cse.sms.control.Check;
 
 /**
  *
  * @author 915
  */
-public class StudentInfo extends javax.swing.JFrame {
+public class ST_Info extends javax.swing.JFrame {
 
     /**
      * Creates new form StudentInfo
      */
-    public StudentInfo() {
+    public ST_Info() {
         initComponents();
     }
 
@@ -132,30 +133,15 @@ public class StudentInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
         String filePath = "studentInfo.txt";
         Student student = new Student(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
-      
+        Check ck = new Check();
+        
         boolean idCheck = true;
-        boolean emptyCheck = true;
+        boolean emCheck = true;
         
-        emptyCheck = student.emptycheck(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
-        //    if(emptyCheck == true) {
-        //        JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 입력을 마저 해주세요");
-        //    } //빈칸 체크 어떻게할지 잘 모르겠어요.
-            
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
-            String line;
-            while((line = br.readLine()) != null) {
-                String[] userInfo = line.split(",");
-                String storedID = userInfo[0];
-                
-                if(sNum.getText().equals(storedID)) {
-                    idCheck = false;
-                }
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+        emCheck = ck.emptyCheck(sName.getText(), sNum.getText(), sMajor.getSelectedItem(), sSecretnum.getText(), sSecretnum2.getText());
+        idCheck = ck.equalCehck(filePath, sNum.getText());
         
-        if(emptyCheck) {
+        if(emCheck) {
             if(idCheck) {
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                     String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
@@ -166,7 +152,7 @@ public class StudentInfo extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "저장되었습니다!");
                     //else if(check == true) 빈칸 있음
                     dispose();
-                    SchoolManager_FirstPage sf = new SchoolManager_FirstPage();
+                    SM_FirstPage sf = new SM_FirstPage();
                     sf.setVisible(true);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -196,20 +182,21 @@ public class StudentInfo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StudentInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ST_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StudentInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ST_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StudentInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ST_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StudentInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ST_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StudentInfo().setVisible(true);
+                new ST_Info().setVisible(true);
             }
         });
     }

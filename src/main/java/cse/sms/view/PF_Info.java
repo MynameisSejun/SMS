@@ -4,21 +4,23 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.Check;
 import cse.sms.model.Professor;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author 915
  */
-public class ProfessorInfo extends javax.swing.JFrame {
+public class PF_Info extends javax.swing.JFrame {
 
     /**
      * Creates new form ProfessorInfo
      */
-    public ProfessorInfo() {
+    public PF_Info() {
         initComponents();
     }
 
@@ -33,13 +35,15 @@ public class ProfessorInfo extends javax.swing.JFrame {
 
         pNum = new javax.swing.JTextField();
         pName = new javax.swing.JTextField();
-        pMajor = new javax.swing.JTextField();
         pSecretnum = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        pSecretnum2 = new javax.swing.JTextField();
+        pMajor = new java.awt.Choice();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,12 +62,14 @@ public class ProfessorInfo extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("-");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(157, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -72,12 +78,17 @@ public class ProfessorInfo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(pNum, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                        .addComponent(pName)
-                        .addComponent(pMajor)
-                        .addComponent(pSecretnum)))
-                .addGap(73, 73, 73))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(pMajor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(pName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pSecretnum, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pSecretnum2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,18 +101,26 @@ public class ProfessorInfo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(pMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pSecretnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(pSecretnum2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
+
+        pMajor.add("전산학과");
+        pMajor.add("전자공학과");
+        pMajor.add("화학공학과");
+        pMajor.add("기계공학과");
+        pMajor.add("항공우주공학과");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -109,13 +128,36 @@ public class ProfessorInfo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String filePath = "professorInfo.txt";
-        Professor student = new Professor(pName.getText(), pNum.getText(), pMajor.getText(), pSecretnum.getText());
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            String professorInfo = student.getProfessorId() + "," + student.getName() + "," + student.getMajor() + "," + student.getSecretNum();
-            writer.write(professorInfo);
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
+        Professor professor = new Professor(pName.getText(), pNum.getText(), pMajor.getSelectedItem(), pSecretnum.getText(), pSecretnum2.getText());
+        Check ck = new Check();
+        
+        boolean idCheck = true;
+        boolean emCheck = true;
+        
+        emCheck = ck.emptyCheck(pName.getText(), pNum.getText(), pMajor.getSelectedItem(), pSecretnum.getText(), pSecretnum2.getText());
+        idCheck = ck.equalCehck(filePath, pNum.getText());
+        
+       if(emCheck) {
+            if(idCheck) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+                    String scNum = professor.getSecretNum() + "-" + professor.getSecretNum2();
+                    String professorInfo = professor.getProfessorId() + "," + professor.getSecretNum2() + "," + professor.getName() + "," + professor.getMajor() + "," + scNum;
+                    //if (check == false) 
+                    writer.write(professorInfo);
+                    writer.newLine();
+                    JOptionPane.showMessageDialog(null, "저장되었습니다!");
+                    //else if(check == true) 빈칸 있음
+                    dispose();
+                    SM_FirstPage sf = new SM_FirstPage();
+                    sf.setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "중복된 교수 번호가 있습니다.");
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -136,20 +178,21 @@ public class ProfessorInfo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProfessorInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PF_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProfessorInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PF_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProfessorInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PF_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProfessorInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PF_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProfessorInfo().setVisible(true);
+                new PF_Info().setVisible(true);
             }
         });
     }
@@ -160,9 +203,11 @@ public class ProfessorInfo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField pMajor;
+    private javax.swing.JLabel jLabel5;
+    private java.awt.Choice pMajor;
     private javax.swing.JTextField pName;
     private javax.swing.JTextField pNum;
     private javax.swing.JTextField pSecretnum;
+    private javax.swing.JTextField pSecretnum2;
     // End of variables declaration//GEN-END:variables
 }

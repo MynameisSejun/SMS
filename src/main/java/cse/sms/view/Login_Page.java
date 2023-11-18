@@ -169,8 +169,7 @@ public class Login_Page extends javax.swing.JFrame {
 
     private void LOGIN_BUTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGIN_BUTTActionPerformed
         // 앞자리 문자 판별 후 학생,교수,학사담당자,수업담당자 화면 나타내기 P 교수, S 학생, H 학사 담당자, G 수업 담당자
-			//txt파일에 들어가는 내용은 아이디,비밀번호 로 입력해야함
-       
+        //txt파일에 들어가는 내용은 아이디,비밀번호 로 입력해야함
         String ID = ID_INPUT.getText(); // 입력한 ID
         String PW = new String(PW_INPUT.getPassword()); // 입력한 PW        Jpasswordfield는 이렇게 받아야함.
         LoginCheck checknum = new LoginCheck();
@@ -184,11 +183,10 @@ public class Login_Page extends javax.swing.JFrame {
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //학생 페이지 창 띄우기
-                    Student_FirstPage St = new Student_FirstPage(); // 매개변수로 학생 정보 넘겨야 할 듯
+                    ST_FirstPage St = new ST_FirstPage(); // 매개변수로 학생 정보 넘겨야 할 듯
                     St.setVisible(true);
                     setVisible(false); // 이전 창 안 보이게 함
                     dispose(); // 창 끄게 하는건데 넣어야 하나??,,,
-                    
                     break;
                 }else if(num == 2){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
@@ -217,7 +215,7 @@ public class Login_Page extends javax.swing.JFrame {
                 num = checknum.LC(file, ID, PW);
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
-                    SchoolManager_FirstPage sf = new SchoolManager_FirstPage();
+                    SM_FirstPage sf = new SM_FirstPage();
                     sf.setVisible(true);
                     setVisible(false);
                     break;

@@ -17,12 +17,12 @@ import javax.swing.JOptionPane;
  *
  * @author 915
  */
-public class SchoolManager_Info extends javax.swing.JFrame {
+public class SM_Info extends javax.swing.JFrame {
 
     /**
      * Creates new form SchoolManager_Info
      */
-    public SchoolManager_Info() {
+    public SM_Info() {
         initComponents();
     }
 
@@ -144,20 +144,21 @@ public class SchoolManager_Info extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SchoolManager_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SM_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SchoolManager_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SM_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SchoolManager_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SM_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SchoolManager_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SM_Info.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SchoolManager_Info().setVisible(true);
+                new SM_Info().setVisible(true);
             }
         });
     }

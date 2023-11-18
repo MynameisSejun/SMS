@@ -8,12 +8,12 @@ package cse.sms.view;
  *
  * @author 915
  */
-public class SchoolManager_FirstPage extends javax.swing.JFrame {
+public class SM_FirstPage extends javax.swing.JFrame {
 
     /**
      * Creates new form SchoolManager
      */
-    public SchoolManager_FirstPage() {
+    public SM_FirstPage() {
         initComponents();
     }
 
@@ -88,21 +88,21 @@ public class SchoolManager_FirstPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        StudentInfo st =  new StudentInfo();
+        SM_StudentMenu st = new SM_StudentMenu();
         st.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        ProfessorInfo pt = new ProfessorInfo();
+        SM_ProfessorMenu pt = new SM_ProfessorMenu();
         pt.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        SchoolManager_Info mt = new SchoolManager_Info();
+        SM_Info mt = new SM_Info();
         mt.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -124,21 +124,23 @@ public class SchoolManager_FirstPage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SchoolManager_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SM_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SchoolManager_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SM_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SchoolManager_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SM_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SchoolManager_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SM_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SchoolManager_FirstPage().setVisible(true);
+                new SM_FirstPage().setVisible(true);
             }
         });
     }
