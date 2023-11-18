@@ -4,8 +4,8 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.*;
 import cse.sms.model.SchoolManager;
-import cse.sms.model.Student;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -97,24 +97,17 @@ public class SM_Info extends javax.swing.JFrame {
         // TODO add your handling code here:
         String filePath = "schoolmanagerInfo.txt";
         SchoolManager manager = new SchoolManager(ID.getText(), PW.getText());
-      
-        boolean idCheck = true;
-        try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
-            String line;
-            while((line = br.readLine()) != null) {
-                String[] userInfo = line.split(",");
-                String storedID = userInfo[0];
-                
-                if(ID.getText().equals(storedID)) {
-                    idCheck = false;
-                }
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
+        MCheck ck = new MCheck();
         
-        if(idCheck) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+        boolean idCheck = true;
+        boolean emCheck = true;
+        
+        emCheck = ck.emptyMCheck(ID.getText(), PW.getText());
+        idCheck = ck.equalCehck(filePath, ID.getText());
+        
+        if(emCheck) {
+            if(idCheck) {
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
                 String managerInfo = manager.getID() + "," + manager.getPW();
                 writer.write(managerInfo);
                 writer.newLine();
@@ -122,9 +115,13 @@ public class SM_Info extends javax.swing.JFrame {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
+            }else {
             JOptionPane.showMessageDialog(null, "중복된 학사 관리자 번호가 있습니다.");
         }
+        }else {
+            JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
