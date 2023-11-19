@@ -20,6 +20,8 @@ public class ProfessorInfo extends javax.swing.JFrame {
      */
     public ProfessorInfo() {
         initComponents();
+        setTitle("교수");
+        setLocationRelativeTo(null);
     }
 
     /**

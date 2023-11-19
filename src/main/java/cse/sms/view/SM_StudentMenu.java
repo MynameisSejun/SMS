@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package cse.sms.view;
-
+//import java.io.BufferedWriter;
+//import java.io.FileWriter;
+//import java.io.IOException;
+//import cse.sms.model.Student;
+//import java.io.BufferedReader;
+//import java.io.FileReader;
+//import javax.swing.JOptionPane;
 /**
  *
  * @author 915
@@ -15,6 +21,8 @@ public class SM_StudentMenu extends javax.swing.JFrame {
      */
     public SM_StudentMenu() {
         initComponents();
+        setTitle("학생 메뉴");
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -34,12 +42,32 @@ public class SM_StudentMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("등록");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StudentRegister(evt);
+            }
+        });
 
         jButton2.setText("수정");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StudentChange(evt);
+            }
+        });
 
         jButton3.setText("조회");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StudentQuery(evt);
+            }
+        });
 
         jButton4.setText("삭제");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StudentDelete(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -47,29 +75,56 @@ public class SM_StudentMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(133, 133, 133)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jButton1)
+                .addGap(37, 37, 37)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void StudentRegister(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentRegister
+        // TODO add your handling code here:
+         StudentInfo st =  new StudentInfo();
+        st.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_StudentRegister
+
+    private void StudentChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentChange
+        // TODO add your handling code here:
+        StudentChange st =  new StudentChange();
+        st.setVisible(true);
+        setVisible(false);
+       
+    }//GEN-LAST:event_StudentChange
+
+    private void StudentQuery(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentQuery
+        // TODO add your handling code here:
+        StudentQuery st =  new StudentQuery();
+        st.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_StudentQuery
+
+    private void StudentDelete(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentDelete
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StudentDelete
 
     /**
      * @param args the command line arguments
