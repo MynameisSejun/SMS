@@ -16,7 +16,7 @@ public class ST_FirstPage extends javax.swing.JFrame {
     public ST_FirstPage() {
         initComponents();
         setTitle("학생");
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -86,10 +86,16 @@ public class ST_FirstPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        StdClasses st = new StdClasses();
+        st.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        GradeCheck st = new GradeCheck();
+        st.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

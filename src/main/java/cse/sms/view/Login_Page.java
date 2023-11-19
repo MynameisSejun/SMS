@@ -178,7 +178,7 @@ public class Login_Page extends javax.swing.JFrame {
         
         switch (first_munja) {
             case 'S':
-                String file = "StudentInfo.txt";
+                String file = "studentInfo.txt";
                 num = checknum.loginCheck(file, ID, PW);
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
