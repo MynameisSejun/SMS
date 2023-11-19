@@ -14,7 +14,9 @@ public class Student {
     private String major;
     private String secretNum;
     private String secretNum2;
-
+    
+    public Student(){}
+    
     public Student(String name, String studentId, String major, String secretNum, String secretNum2) {
         this.name = name;
         this.studentId = studentId;

@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,42 +22,80 @@ public class GradeCheck extends javax.swing.JFrame {
      */
     public GradeCheck() {
         initComponents();
-    }
-    
-    
-    private void InputclassInfo() {  //강의 가능 수업 목록
-        
-        try{
-            System.out.println("--------start");
-            File file = new File("classes.txt");
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            Object [] tableLines = br.lines().toArray();    //txt파일에서 몇줄인지 가져오기
-            
-            for (Object tableLine : tableLines) {
-                String line = tableLine.toString().trim();  //trim - 공백제거
-                String[] dataRow = line.split(",");
-                
-                for (String row : dataRow) {
-                    System.out.println("row : " + row);
-                }
-            }
-        } catch (Exception ex) {
-            ex.getStackTrace();
-        }
+        setTitle("성적 확인");
+        InputstdInfo();
+        getSum();
     }
 
     private void InputstdInfo() {    //학생 수강 내역 파일에서 출력
-         try{
+        try {
             BufferedReader br = new BufferedReader(new FileReader("studentclasses.txt"));
-            Object [] tableLines = br.lines().toArray();    //txt파일에서 몇줄인지 가져오기
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            Object[] tableLines = br.lines().toArray();    //txt파일에서 몇줄인지 가져오기
+
+            String inputStr[] = new String[4];
             for (Object tableLine : tableLines) {
                 String line = tableLine.toString().trim(); //trim - 공백제거
                 String[] dataRow = line.split(",");
+                
+                inputStr[0] = dataRow[2];    //강좌번호
+                inputStr[1] = dataRow[3];    //강좌명
+                inputStr[2] = dataRow[4];    //학점
+                inputStr[3] = dataRow[8];    //성적
+                        
+                model.addRow(inputStr);
             }
 
         } catch (Exception ex) {
             ex.getStackTrace();
         }
+    }
+
+    private void getSum() {
+        double sum = 0;
+        String score;
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            score = jTable1.getValueAt(i, 3).toString();
+            switch (score) {
+                case "A+":
+                    sum += 4.5;
+                    break;
+
+                case "A0":
+                    sum += 4.0;
+                    break;
+
+                case "B+":
+                    sum += 3.5;
+                    break;
+
+                case "B0":
+                    sum += 3.0;
+                    break;
+
+                case "C+":
+                    sum += 2.5;
+                    break;
+
+                case "C0":
+                    sum += 2.0;
+                    break;
+
+                case "D+":
+                    sum += 1.5;
+                    break;
+
+                case "D0":
+                    sum += 1.0;
+                default:
+                    break;
+
+            }
+        }
+        
+        sum = (sum / jTable1.getRowCount());
+        String result = String.format("%.2f", sum);
+        jTextField1.setText(result);
     }
 
     /**
@@ -68,42 +107,71 @@ public class GradeCheck extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "강좌번호", "강의명", "학점수", "성적"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        jTextField1.setText("jTextField1");
+
+        jLabel1.setText("평균 학점");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jButton1)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jButton1)
-                .addContainerGap(170, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(39, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        System.out.println("테스트");
-        InputclassInfo();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +209,9 @@ public class GradeCheck extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
