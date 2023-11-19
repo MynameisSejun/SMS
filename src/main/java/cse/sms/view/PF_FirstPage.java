@@ -8,12 +8,12 @@ package cse.sms.view;
  *
  * @author LG
  */
-public class PF_LectureList extends javax.swing.JFrame {
+public class PF_FirstPage extends javax.swing.JFrame {
 
     /**
      * Creates new form PF_LectureList
      */
-    public PF_LectureList() {
+    public PF_FirstPage() {
         initComponents();
     }
 
@@ -125,20 +125,21 @@ public class PF_LectureList extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PF_LectureList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PF_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PF_LectureList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PF_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PF_LectureList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PF_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PF_LectureList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PF_FirstPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PF_LectureList().setVisible(true);
+                new PF_FirstPage().setVisible(true);
             }
         });
     }
