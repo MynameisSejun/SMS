@@ -27,6 +27,26 @@ public class Login_Page extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
+    public class LoginData { // 비밀번호 변경 창에 아이디랑 비번 넘겨줄 메소드
+    private static String username;
+    private static String password;
+
+    public static String getUsername() {
+        return "S123"; // 임의로 테스트해보기 위해서 한거임. return username;으로 고치기
+    }
+
+    public static void setUsername(String username) {
+        LoginData.username = username;
+    }
+
+    public static String getPassword() {
+        return "1234567"; // 임의로 테스트하기 위한 코드. return password; 로 고치기
+    }
+
+    public static void setPassword(String password) {
+        LoginData.password = password;
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -175,6 +195,9 @@ public class Login_Page extends javax.swing.JFrame {
         Check checknum = new Check();
         char first_munja = ID_INPUT.getText().charAt(0); // 첫 번째 글자 판별 후 페이지 이동
         int num;
+        
+        LoginData.setUsername(ID);
+        LoginData.setPassword(PW); // ID와 PW를 LoginData 클래스에 저장
         
         switch (first_munja) {
             case 'S':
