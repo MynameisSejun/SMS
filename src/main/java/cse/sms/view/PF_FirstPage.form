@@ -87,21 +87,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc218;&#xac15;&#xc0dd; &#xbaa9;&#xb85d;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButt_StudentListActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButt_Input_Grade">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xc131;&#xc801; &#xc785;&#xb825;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButt_Input_GradeActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButt_AttendanceList">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xcd9c;&#xc11d;&#xbd80;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButt_AttendanceListActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButt_Back">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xb4a4;&#xb85c;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButt_BackActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>

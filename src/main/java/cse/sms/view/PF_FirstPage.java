@@ -42,12 +42,32 @@ public class PF_FirstPage extends javax.swing.JFrame {
         jButton2.setText("조회");
 
         jButt_StudentList.setText("수강생 목록");
+        jButt_StudentList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_StudentListActionPerformed(evt);
+            }
+        });
 
         jButt_Input_Grade.setText("성적 입력");
+        jButt_Input_Grade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_Input_GradeActionPerformed(evt);
+            }
+        });
 
         jButt_AttendanceList.setText("출석부");
+        jButt_AttendanceList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_AttendanceListActionPerformed(evt);
+            }
+        });
 
         jButt_Back.setText("뒤로");
+        jButt_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_BackActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +127,30 @@ public class PF_FirstPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButt_StudentListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_StudentListActionPerformed
+        PF_StudentList pf = new PF_StudentList();
+        pf.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButt_StudentListActionPerformed
+
+    private void jButt_Input_GradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_Input_GradeActionPerformed
+        PF_Input_Grade pf = new PF_Input_Grade();
+        pf.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButt_Input_GradeActionPerformed
+
+    private void jButt_AttendanceListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_AttendanceListActionPerformed
+        PF_AttendanceList pf = new PF_AttendanceList();
+        pf.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButt_AttendanceListActionPerformed
+
+    private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
+        Login_Page pf = new Login_Page();
+        pf.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButt_BackActionPerformed
 
     /**
      * @param args the command line arguments

@@ -36,6 +36,11 @@ public class PF_AttendanceList extends javax.swing.JFrame {
         jLabel1.setText("출석부");
 
         jButt_Back.setText("뒤로");
+        jButt_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_BackActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +85,12 @@ public class PF_AttendanceList extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
+        PF_FirstPage pf = new PF_FirstPage();
+        pf.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jButt_BackActionPerformed
 
     /**
      * @param args the command line arguments
