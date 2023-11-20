@@ -213,8 +213,10 @@ public class Login_Page extends javax.swing.JFrame {
                     break;
                 }else if(num == 2){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
+                    break;
                 }else {
                     JOptionPane.showMessageDialog(null, "아이디가 일치하지 않습니다."); // 로그인 실패 -> 아이디 불일치
+                    break;
                 }
                 
             case 'P':
@@ -230,12 +232,30 @@ public class Login_Page extends javax.swing.JFrame {
                     break;
                 }else if(num == 2){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
+                    break;
                 }else {
                     JOptionPane.showMessageDialog(null, "아이디가 일치하지 않습니다."); // 로그인 실패 -> 아이디 불일치
+                    break;
                 }
                 
             case 'G':
                 //수업 관리자 화면이랑 정보저장 만들어야함
+                file = "classmanagerInfo.txt";
+                num = checknum.loginCheck(file, ID, PW);
+                if(num == 1) {
+                    JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
+                    CM_FirstPage cf = new CM_FirstPage();
+                    cf.setVisible(true);
+                    setVisible(false);
+                    break;
+                    //교수 페이지 창 띄우기 -> 교수 페이지 만들어야함
+                }else if(num == 2){
+                    JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
+                    break;
+                }else {
+                    JOptionPane.showMessageDialog(null, "아이디가 일치하지 않습니다."); // 로그인 실패 -> 아이디 불일치
+                    break;
+                }
                 
             case 'H':
                 //학사 관리자 화면이랑 정보저장 만들어야함
@@ -250,8 +270,10 @@ public class Login_Page extends javax.swing.JFrame {
                     //교수 페이지 창 띄우기 -> 교수 페이지 만들어야함
                 }else if(num == 2){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
+                    break;
                 }else {
                     JOptionPane.showMessageDialog(null, "아이디가 일치하지 않습니다."); // 로그인 실패 -> 아이디 불일치
+                    break;
                 }
         }  
         
