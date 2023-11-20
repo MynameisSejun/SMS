@@ -9,7 +9,7 @@ package cse.sms.view;
  * @author suk22
  */
 public class ST_FirstPage extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Student_FirstPage
      */
