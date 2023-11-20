@@ -200,6 +200,11 @@ public class Login_Page extends javax.swing.JFrame {
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //교수 페이지 창 띄우기 -> 교수 페이지 만들어야함
+                    PF_FirstPage pf = new PF_FirstPage();
+                    pf.setVisible(true);
+                    setVisible(false);
+                    dispose();
+                    break;
                 }else if(num == 2){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
                 }else {
