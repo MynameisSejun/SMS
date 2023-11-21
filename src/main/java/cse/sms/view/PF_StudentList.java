@@ -4,6 +4,15 @@
  */
 package cse.sms.view;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author LG
@@ -15,8 +24,47 @@ public class PF_StudentList extends javax.swing.JFrame {
      */
     public PF_StudentList() {
         initComponents();
+        
     }
+    
+    private String lectureNumber;
+    private String lectureName;
 
+    public PF_StudentList(String lectureNumber, String lectureName) { // 'studentclasses.txt' 파일에서 데이터를 읽어옴
+        this.lectureNumber = lectureNumber;
+        this.lectureName = lectureName;
+        initComponents();
+        setLocationRelativeTo(null);
+        // 이제 강의 번호와 강의명을 사용하여 수강생 목록을 불러올 수 있습니다.
+    }
+    
+    public List<String[]> readStudentClasses(String lectureNumber) throws IOException {
+    File file = new File("studentclasses.txt");
+    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+    List<String[]> studentClasses = new ArrayList<>();
+    String line;
+    while ((line = br.readLine()) != null) {
+        String[] data = line.split(",");
+        if (data[2].equals(lectureNumber)) {
+            studentClasses.add(new String[] {data[1], data[5]}); // 학생 이름과 학과만 추가
+        }
+    }
+    br.close();
+    return studentClasses;
+}   
+    
+    public void fillTable(String lectureNumber) {  //수강생 목록 페이지의 JTable에 데이터를 채움.
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); // 테이블의 모든 행을 삭제
+    try {
+        List<String[]> studentClasses = readStudentClasses(lectureNumber);
+        for (String[] studentClass : studentClasses) {
+            model.addRow(studentClass); // 테이블에 행을 추가
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
