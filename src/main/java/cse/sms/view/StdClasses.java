@@ -4,6 +4,7 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +26,7 @@ import java.util.logging.Logger;
  */
 public class StdClasses extends javax.swing.JFrame {
 
+    UserData loginUser = UserData.getInstance();
     int grade = 0;
 
     /**
@@ -32,7 +34,7 @@ public class StdClasses extends javax.swing.JFrame {
      */
     public StdClasses() {
         initComponents();
-        setTitle("수강 신청");
+        setTitle("수강 신청" + loginUser.getID());
         InputclassInfo();   //개설 강의 보이기
         InputstdInfo();     //현재 신청 내역 보이기
     }
