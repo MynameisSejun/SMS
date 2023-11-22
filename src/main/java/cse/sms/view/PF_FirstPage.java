@@ -45,17 +45,8 @@ public class PF_FirstPage extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         //model.setRowCount(0);  // 테이블 초기화
         
-        System.out.println(Login_Page.professorName);
-        
-        
         while ((line = br.readLine()) != null) {
             data = line.split(",");
-            
-            System.out.println("체크");
-            System.out.println(data[0]+data[4]);
-            
-            boolean T = data[4].equals(Login_Page.professorName);
-            System.out.println(T);
             
             if (data[4].equals(Login_Page.professorName)) {
                 model.addRow(new Object[]{data[0], data[1]});
@@ -196,15 +187,32 @@ public class PF_FirstPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButt_StudentListActionPerformed
 
     private void jButt_Input_GradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_Input_GradeActionPerformed
+
+        int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow != -1) {
+        String lectureNumber = (String) jTable1.getValueAt(selectedRow, 0);
         PF_Input_Grade pf = new PF_Input_Grade();
+        pf.fillTable(lectureNumber);
         pf.setVisible(true);
         setVisible(false);
+    } else {
+        JOptionPane.showMessageDialog(this, "강의를 선택해주세요.");
+    }
     }//GEN-LAST:event_jButt_Input_GradeActionPerformed
 
     private void jButt_AttendanceListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_AttendanceListActionPerformed
+        
+        int selectedRow = jTable1.getSelectedRow();
+    if (selectedRow != -1) {
+        String lectureNumber = (String) jTable1.getValueAt(selectedRow, 0);
         PF_AttendanceList pf = new PF_AttendanceList();
+        pf.fillTable(lectureNumber);
         pf.setVisible(true);
         setVisible(false);
+    } else {
+        JOptionPane.showMessageDialog(this, "강의를 선택해주세요.");
+    }
+    
     }//GEN-LAST:event_jButt_AttendanceListActionPerformed
 
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
