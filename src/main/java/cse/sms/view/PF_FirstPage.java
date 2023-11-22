@@ -4,6 +4,7 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import cse.sms.view.Login_Page;
 import cse.sms.view.Login_Page;
 import java.io.BufferedReader;
@@ -28,42 +29,41 @@ import java.io.IOException;
  * @author LG
  */
 public class PF_FirstPage extends javax.swing.JFrame {
-
+    //UserData loginUser = UserData.getInstance();
+    
     /**
      * Creates new form PF_LectureList
      */
     public PF_FirstPage() {
         initComponents();
         setLocationRelativeTo(null);
-        
-    try {
-        File file = new File("profclasses.txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
-        String line;
-        String[] data;
+        fillTable();
+    
+    }
+    
+    private void fillTable() {
+        try {
+            File file = new File("profclasses.txt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            String line;
+            String[] data;
 
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        //model.setRowCount(0);  // 테이블 초기화
-        
-        while ((line = br.readLine()) != null) {
-            data = line.split(",");
-            
-            if (data[4].equals(Login_Page.professorName)) {
-                model.addRow(new Object[]{data[0], data[1]});
-                
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            // model.setRowCount(0);  // 테이블 초기화
+
+            while ((line = br.readLine()) != null) {
+                data = line.split(",");
+                if (data[4].equals(Login_Page.professorName)) {
+                    model.addRow(new Object[]{data[0], data[1]});
+                }
             }
-           
+            br.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        br.close();
-    } catch (FileNotFoundException e) {
-        e.printStackTrace();
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-    
-    
-    }
-    
     
     
     /**

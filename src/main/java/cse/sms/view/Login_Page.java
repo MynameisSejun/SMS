@@ -17,7 +17,6 @@ import java.io.IOException;
  */
 public class Login_Page extends javax.swing.JFrame {
     public static String professorName;
-    
     /**
      * Creates new form Frametest
      */
@@ -235,6 +234,7 @@ public class Login_Page extends javax.swing.JFrame {
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     // 아래 기능은 교수 PF_FistPage에 강의 목록을 띄우기 위한 교수 이름을 넘겨주는 코드입니다.
+                    
                     String line;
                     String[] data;
                     try {
@@ -242,7 +242,7 @@ public class Login_Page extends javax.swing.JFrame {
                         while ((line = br.readLine()) != null) {
                             data = line.split(",");
                             if (data[0].equals(ID)) {
-                            professorName = data[2]; // 로그인 성공 시 교수님의 이름을 파일에서 찾아 저장
+                                professorName = data[2]; // 로그인 성공 시 교수님의 이름을 저장
                             break;
                         }
                     }

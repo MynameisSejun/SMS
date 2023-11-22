@@ -25,6 +25,7 @@ public class PF_AttendanceList extends javax.swing.JFrame {
      */
     public PF_AttendanceList() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     public List<String[]> readStudentClasses(String lectureNumber) throws IOException {
@@ -34,6 +35,11 @@ public class PF_AttendanceList extends javax.swing.JFrame {
     String line;
     while ((line = br.readLine()) != null) {
         String[] data = line.split(",");
+        
+         if (data.length < 3) { // 필요한 필드가 모두 있는지 확인
+            continue; // 필드가 부족한 행은 건너뜁니다.
+        }
+         
         if (data[2].equals(lectureNumber)) {
             studentClasses.add(new String[] {data[0], data[1], data[5], data[8]}); // 학번, 학생 이름, 학과, 학점을 추가
         }
