@@ -57,36 +57,21 @@ public class GradeCheck extends javax.swing.JFrame {
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             score = jTable1.getValueAt(i, 3).toString();
             switch (score) {
-                case "A+":
-                    sum += 4.5;
-                    break;
-
-                case "A0":
+                case "A":
                     sum += 4.0;
                     break;
-
-                case "B+":
-                    sum += 3.5;
-                    break;
-
-                case "B0":
+                case "B":
                     sum += 3.0;
                     break;
-
-                case "C+":
-                    sum += 2.5;
-                    break;
-
-                case "C0":
+                case "C":
                     sum += 2.0;
                     break;
-
-                case "D+":
-                    sum += 1.5;
+                case "D":
+                    sum += 1.0;
                     break;
 
-                case "D0":
-                    sum += 1.0;
+                case "F":
+                    sum += 0;
                 default:
                     break;
 
