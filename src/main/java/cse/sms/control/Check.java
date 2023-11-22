@@ -5,8 +5,10 @@
 package cse.sms.control;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  *
@@ -76,7 +78,8 @@ public class Check {
     
     public String getName(String filePath, String ID) {
         String name = null;
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"))) {
             String line;
             while ((line = br.readLine()) != null) {
                     String[] userInfo = line.split(","); // txt파일에 저장되어있는 아이디와 비밀번호를 나눠서 저장.

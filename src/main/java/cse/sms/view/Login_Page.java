@@ -16,11 +16,10 @@ import java.io.IOException;
  * @author suk22
  */
 public class Login_Page extends javax.swing.JFrame {
-    public static String professorName;
+    
     /**
      * Creates new form Frametest
      */
-    
     
     public Login_Page() {
         initComponents();
@@ -28,26 +27,6 @@ public class Login_Page extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     
-    public class LoginData { // 비밀번호 변경 창에 아이디랑 비번 넘겨줄 메소드
-    private static String username;
-    private static String password;
-
-    public static String getUsername() {
-        return "S123"; // 임의로 테스트해보기 위해서 한거임. return username;으로 고치기
-    }
-
-    public static void setUsername(String username) {
-        LoginData.username = username;
-    }
-
-    public static String getPassword() {
-        return "1234567"; // 임의로 테스트하기 위한 코드. return password; 로 고치기
-    }
-
-    public static void setPassword(String password) {
-        LoginData.password = password;
-    }
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,25 +171,21 @@ public class Login_Page extends javax.swing.JFrame {
         // 앞자리 문자 판별 후 학생,교수,학사담당자,수업담당자 화면 나타내기 P 교수, S 학생, H 학사 담당자, G 수업 담당자
         //txt파일에 들어가는 내용은 아이디,비밀번호 로 입력해야함
         String ID = ID_INPUT.getText(); // 입력한 ID
-        String PW = new String(PW_INPUT.getPassword()); // 입력한 PW        Jpasswordfield는 이렇게 받아야함.
+        String PW = new String(PW_INPUT.getPassword()); // 입력한 PW
         Check checknum = new Check();
         char first_munja = ID_INPUT.getText().charAt(0); // 첫 번째 글자 판별 후 페이지 이동
         int num;
         
-        LoginData.setUsername(ID);
-        LoginData.setPassword(PW); // ID와 PW를 LoginData 클래스에 저장
-        
         UserData loginUser = UserData.getInstance();
         loginUser.setID(ID);
-        
-        
-        
+        loginUser.setPW(PW);
         
         switch (first_munja) {
             case 'S':
                 String file = "studentInfo.txt";
                 num = checknum.loginCheck(file, ID, PW);
                 loginUser.setName(checknum.getName(file, ID));
+                System.out.println(loginUser.getName());
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //학생 페이지 창 띄우기

@@ -10,11 +10,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import cse.sms.model.Student;
+
 /**
  *
  * @author 원채연
@@ -35,12 +36,9 @@ public class ST_StudentClass extends javax.swing.JFrame {
     }
 
     private void InputclassInfo() {  //강의 가능 수업 목록
-
-        try {
-            File file = new File("classes.txt");
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        File file = new File("classes.txt");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));){
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            
             String temp;
             while ((temp = br.readLine()) != null) {
                 String[] dataRow = temp.split(",");
@@ -53,13 +51,11 @@ public class ST_StudentClass extends javax.swing.JFrame {
     }
 
     private void OutputstdInfo() {    //학생 수강 내역 파일로 입력
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("studentclasses.txt", true));
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("studentclasses.txt", true))){
             String stdnum = loginUser.getID();
             String name = loginUser.getName();
-
-            bw.write(stdnum);
-            bw.write(name);
+            
+            bw.write(stdnum + "," + name + ",");
             bw.flush();
 
         } catch (Exception ex) {
@@ -69,8 +65,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
     }
 
     private void OutputstdclassInfo(int i) {    //학생 수강 내역 파일로 입력
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("studentclasses.txt", true));  //true면 이어쓰기임
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("studentclasses.txt", true))){
             for (int j = 0; j < jTable1.getColumnCount(); j++) {
                 bw.write(jTable1.getValueAt(i, j).toString() + ",");
             }
@@ -82,8 +77,8 @@ public class ST_StudentClass extends javax.swing.JFrame {
     }
 
     private void InputstdInfo() {    //학생 수강 내역 파일에서 출력
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("studentclasses.txt"));
+        String file = "studentclasses.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(file))){          
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.setNumRows(0);    //Row 0해서 리셋
 
@@ -91,6 +86,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
             while ((temp = br.readLine()) != null) {
                 String[] dataRow = temp.split(",");
                 String inputStr[] = new String[6];
+                if(dataRow[1].equals(loginUser.getName())) {
 
                 inputStr[0] = dataRow[2];    //강좌번호
                 inputStr[1] = dataRow[3];    //강좌명
@@ -100,7 +96,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
                 inputStr[5] = dataRow[7];    //설명
 
                 model.addRow(inputStr);
-
+                }
             }
         } catch (Exception ex) {
             ex.getStackTrace();
@@ -121,11 +117,10 @@ public class ST_StudentClass extends javax.swing.JFrame {
     }
 
     public int DoubleCheck(int selectedline) {
-
-        try {
+        String file = "studentclasses.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(file))){
             TableModel model = jTable1.getModel();
             String selectedclassnum = (model.getValueAt(selectedline, 0).toString()); //선택한 줄의 classnumber
-            BufferedReader br = new BufferedReader(new FileReader("studentclasses.txt"));
             String line;
             while ((line = br.readLine()) != null) {
                 String[] classInfo = line.split(",");
@@ -156,6 +151,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -214,21 +210,34 @@ public class ST_StudentClass extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        jButton2.setText("뒤로 가기");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(76, 76, 76)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(297, 297, 297)
-                            .addComponent(jButton1))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(76, 76, 76)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(297, 297, 297)
+                                    .addComponent(jButton1))))
+                        .addGap(0, 78, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +248,9 @@ public class ST_StudentClass extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,7 +266,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
         if (a == 0) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
             OutputstdInfo();            //학번,이름 저장
             OutputstdclassInfo(i);      //수강내역 파일에 저장
-            InputstdInfo();                 //화면에 보이기
+            InputstdInfo();             //화면에 보이기
 
             TableModel model = jTable1.getModel();
             grade += Integer.parseInt(model.getValueAt(i, 2).toString());   //학점 더하기
@@ -263,8 +274,13 @@ public class ST_StudentClass extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;

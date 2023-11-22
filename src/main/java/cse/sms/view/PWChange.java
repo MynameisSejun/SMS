@@ -4,18 +4,8 @@
  */
 package cse.sms.view;
 
-import cse.sms.view.Login_Page;
-import cse.sms.view.Login_Page.LoginData;
-import cse.sms.control.Check;
+import cse.sms.control.UserData;
 import javax.swing.JOptionPane;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -28,13 +18,14 @@ import java.io.BufferedWriter;
  */
 public class PWChange extends javax.swing.JFrame {
     
+    UserData loginUser = UserData.getInstance();
     
     /**
      * Creates new form PWChange
      */
     public PWChange() {
         initComponents();
-        setTitle("비밀번호 변경");
+        setTitle("비밀번호 변경 " + loginUser.getID() + loginUser.getName());
         setLocationRelativeTo(null);
     }
 
@@ -117,38 +108,27 @@ public class PWChange extends javax.swing.JFrame {
         // 이전 로그인 창에서 받아온 아이디를 텍스트 필드에 설정
         
         // 누구인지 판별해서 읽을 파일 정하기
-        char firstChar = LoginData.getUsername().charAt(0);
+        char firstChar = loginUser.getID().charAt(0);
         
-        System.out.println(LoginData.getUsername());
+        String filename = null;
         
-        String filename;
-
-        if (firstChar == 'S') {
-            filename = "studentInfo.txt";
-        } else if (firstChar == 'P') {
-            filename = "professorInfo.txt";
-        } else if (firstChar == 'G') {
-            filename = "classmanagerInfo.txt";
-        } else if (firstChar == 'H') {
-            filename = "schoolmanagerInfo.txt";
-        } else {
-            // 예외 처리: 다른 시작 문자에 대한 처리는 음~ 일단 패스
-            return;
+        switch(firstChar) {
+            case 'S':
+                filename = "studentInfo.txt";
+            case 'P':
+                filename = "professorInfo.txt";
+            case 'G':
+                filename = "classmanagerInfo.txt";
+            case 'H':
+                filename = "schoolmanagerInfo.txt";
         }
-        System.out.println(filename);
-        
+       
             String currentPassword = currentPasswordTextField.getText(); //현재 비번
             String newPassword = newPasswordTextField.getText(); // 새 비번
             String confirmNewPassword = confirmNewPasswordTextField.getText(); // 새 비번 확인
             
-            System.out.println(currentPassword);
-            System.out.println(newPassword);
-            System.out.println(confirmNewPassword);
-            System.out.println(LoginData.getPassword());
-            
-            
             // 현재 비번, 새 비번, 새 비번 확인이 모두 일치하는지 확인
-            if (currentPassword.equals(LoginData.getPassword()) && newPassword.equals(confirmNewPassword)) {
+            if (currentPassword.equals(loginUser.getID()) && newPassword.equals(confirmNewPassword)) {
                 // BufferedReader를 사용하여 파일을 읽어 아이디를 비교하여 비밀번호를 변경
                 List<String> lines = new ArrayList<>();
                 try {
@@ -164,7 +144,7 @@ public class PWChange extends javax.swing.JFrame {
                         String savedID = data[0];
                         String savedPassword = data[1];
                         
-                        if (LoginData.getUsername().equals(savedID)) {
+                        if (loginUser.getID().equals(savedID)) {
                             data[1] = newPassword; // 새로운 비밀번호로 변경
                         }
                         lines.add(String.join(",", data)); // 변경된 데이터를 리스트에 추가

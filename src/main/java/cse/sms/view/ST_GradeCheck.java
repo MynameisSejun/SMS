@@ -15,12 +15,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 원채연
  */
-public class GradeCheck extends javax.swing.JFrame {
+public class ST_GradeCheck extends javax.swing.JFrame {
 
     /**
      * Creates new form GradeCheck
      */
-    public GradeCheck() {
+    public ST_GradeCheck() {
         initComponents();
         setTitle("성적 확인");
         InputstdInfo();

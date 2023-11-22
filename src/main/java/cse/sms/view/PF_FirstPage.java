@@ -170,8 +170,8 @@ public class PF_FirstPage extends javax.swing.JFrame {
 
     private void jButt_StudentListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_StudentListActionPerformed
 
-         int selectedRow = jTable1.getSelectedRow(); // 사용자가 선택한 행의 인덱스를 가져옴.
-    if (selectedRow != -1) { // 행이 선택되었는지 확인합니다.
+        int selectedRow = jTable1.getSelectedRow(); // 사용자가 선택한 행의 인덱스를 가져옴.
+        if (selectedRow != -1) { // 행이 선택되었는지 확인합니다.
         String lectureNumber = (String) jTable1.getValueAt(selectedRow, 0); // 선택한 행의 첫 번째 열의 값을 가져옴.
         String lectureName = (String) jTable1.getValueAt(selectedRow, 1); // 선택한 행의 두 번째 열의 값을 가져옴.
         
@@ -189,7 +189,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
     private void jButt_Input_GradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_Input_GradeActionPerformed
 
         int selectedRow = jTable1.getSelectedRow();
-    if (selectedRow != -1) {
+        if (selectedRow != -1) {
         String lectureNumber = (String) jTable1.getValueAt(selectedRow, 0);
         PF_Input_Grade pf = new PF_Input_Grade();
         pf.fillTable(lectureNumber);

@@ -116,13 +116,15 @@ public class ST_FirstPage extends javax.swing.JFrame {
         ST_StudentClass st = new ST_StudentClass();
         st.setVisible(true);
         setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        GradeCheck st = new GradeCheck();
+        ST_GradeCheck st = new ST_GradeCheck();
         st.setVisible(true);
         setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -130,6 +132,7 @@ public class ST_FirstPage extends javax.swing.JFrame {
         PWChange pw = new PWChange();
         pw.setVisible(true);
         setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
