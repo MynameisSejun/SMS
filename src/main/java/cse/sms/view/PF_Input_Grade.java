@@ -4,19 +4,101 @@
  */
 package cse.sms.view;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author LG
  */
 public class PF_Input_Grade extends javax.swing.JFrame {
-
+    private String currentLectureNumber; // 현재 선택된 강의 번호를 저장하는 멤버 변수
     /**
      * Creates new form PF_Input_Grade
      */
     public PF_Input_Grade() {
         initComponents();
+        setLocationRelativeTo(null);
     }
+    
+    public List<String[]> readStudentClasses(String lectureNumber) throws IOException {
+        
+    this.currentLectureNumber = lectureNumber;
+    
+    File file = new File("studentclasses.txt");
+    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+    List<String[]> studentClasses = new ArrayList<>();
+    String line;
+    while ((line = br.readLine()) != null) {
+        String[] data = line.split(",");
+        
+        if (data.length < 3) { // 필요한 필드가 모두 있는지 확인
+            continue; // 필드가 부족한 행은 건너뜁니다.
+        }
+        
+        if (data[2].equals(lectureNumber)) {
+            studentClasses.add(new String[] {data[0], data[1], data[5], data[8]}); // 학번, 학생 이름, 학과, 학점을 추가
+        }
+    }
+    br.close();
+    return studentClasses;
+}
 
+    
+    public void fillTable(String lectureNumber) {
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+    model.setRowCount(0); // 테이블의 모든 행을 삭제
+    try {
+        List<String[]> studentClasses = readStudentClasses(lectureNumber);
+        for (String[] studentClass : studentClasses) {
+            model.addRow(studentClass); // 테이블에 행을 추가
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+    
+    private void updateGrade(String studentNumber, String newGrade) throws IOException {
+        
+        System.out.println("업데이트 실행됨.");
+        
+        File file = new File("studentclasses.txt");
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                
+                System.out.println("data[1]: "+data[1]);
+                boolean T = data.length >= 2 && data[1].equals(studentNumber);
+                System.out.println("data.length >= 2 && data[1].equals(studentNumber): "+T);
+                
+                if (data.length >= 2 && data[1].equals(studentNumber)) {
+                    data[8] = newGrade; // 성적 업데이트
+                    System.out.println("data[8]: "+data[8]);
+                    line = String.join(",", data);
+                }
+                lines.add(line);
+            }
+        }
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"))) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,7 +137,12 @@ public class PF_Input_Grade extends javax.swing.JFrame {
 
         jLabel2.setText("성적 입력");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C", "D", "F" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButt_Back.setText("뒤로");
         jButt_Back.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +152,11 @@ public class PF_Input_Grade extends javax.swing.JFrame {
         });
 
         jButt_Input.setText("입력");
+        jButt_Input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_InputActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,6 +224,33 @@ public class PF_Input_Grade extends javax.swing.JFrame {
         pf.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButt_BackActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButt_InputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_InputActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTable2.getSelectedRow();
+        if (selectedRow != -1) {
+            String grade = (String) jComboBox1.getSelectedItem(); // 선택한 성적을 가져옴
+            String studentNumber = (String) jTable2.getValueAt(selectedRow, 1); // 선택한 학생의 이름을 가져옴
+            
+                    
+            System.out.println("jComboBox1.getSelectedItem(): "+jComboBox1.getSelectedItem());
+            System.out.println("jTable2.getValueAt(selectedRow, 1): "+jTable2.getValueAt(selectedRow, 1));
+            
+            try {
+                updateGrade(studentNumber, grade);
+                JOptionPane.showMessageDialog(this, "성적이 입력되었습니다."); // 성적 입력 확인 메시지
+                fillTable(this.currentLectureNumber); // 현재 선택된 강의 번호로 테이블을 업데이트
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "학생을 선택해주세요.");
+        }
+    }//GEN-LAST:event_jButt_InputActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButt_Back;

@@ -4,6 +4,16 @@
  */
 package cse.sms.view;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author LG
@@ -15,8 +25,41 @@ public class PF_AttendanceList extends javax.swing.JFrame {
      */
     public PF_AttendanceList() {
         initComponents();
+        setLocationRelativeTo(null);
     }
-
+    
+    public List<String[]> readStudentClasses(String lectureNumber) throws IOException {
+    File file = new File("studentclasses.txt");
+    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+    List<String[]> studentClasses = new ArrayList<>();
+    String line;
+    while ((line = br.readLine()) != null) {
+        String[] data = line.split(",");
+        
+         if (data.length < 3) { // 필요한 필드가 모두 있는지 확인
+            continue; // 필드가 부족한 행은 건너뜁니다.
+        }
+         
+        if (data[2].equals(lectureNumber)) {
+            studentClasses.add(new String[] {data[0], data[1], data[5], data[8]}); // 학번, 학생 이름, 학과, 학점을 추가
+        }
+    }
+    br.close();
+    return studentClasses;
+}
+    public void fillTable(String lectureNumber) {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); // 테이블의 모든 행을 삭제
+    try {
+        List<String[]> studentClasses = readStudentClasses(lectureNumber);
+        for (String[] studentClass : studentClasses) {
+            model.addRow(studentClass); // 테이블에 행을 추가
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
