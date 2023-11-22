@@ -4,18 +4,22 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
+
 /**
  *
  * @author 원채연
  */
 public class CM_CourseOpen extends javax.swing.JFrame {
-
+    
+    UserData loginUser = UserData.getInstance();
+    
     /**
      * Creates new form CM_CourseOpen
      */
     public CM_CourseOpen() {
         initComponents();
-        setTitle("강좌개설");
+        setTitle("강좌개설" + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -92,6 +96,11 @@ public class CM_CourseOpen extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jButton1.setText("등록");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("뒤로 가기");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -174,6 +183,10 @@ public class CM_CourseOpen extends javax.swing.JFrame {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // 강좌 정보 입력
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

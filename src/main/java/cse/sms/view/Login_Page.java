@@ -5,6 +5,7 @@
 package cse.sms.view;
 
 import cse.sms.control.Check;
+import cse.sms.control.UserData;
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
 import java.io.File;
@@ -200,17 +201,24 @@ public class Login_Page extends javax.swing.JFrame {
         LoginData.setUsername(ID);
         LoginData.setPassword(PW); // ID와 PW를 LoginData 클래스에 저장
         
+        UserData loginUser = UserData.getInstance();
+        loginUser.setID(ID);
+        
+        
+        
+        
         switch (first_munja) {
             case 'S':
                 String file = "studentInfo.txt";
                 num = checknum.loginCheck(file, ID, PW);
+                loginUser.setName(checknum.getName(file, ID));
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //학생 페이지 창 띄우기
-                    ST_FirstPage St = new ST_FirstPage(); // 매개변수로 학생 정보 넘겨야 할 듯
+                    ST_FirstPage St = new ST_FirstPage();
                     St.setVisible(true);
-                    setVisible(false); // 이전 창 안 보이게 함
-                    dispose(); // 창 끄게 하는건데 넣어야 하나??,,,
+                    setVisible(false);
+                    dispose();
                     break;
                 }else if(num == 2){
                     JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
@@ -223,6 +231,7 @@ public class Login_Page extends javax.swing.JFrame {
             case 'P':
                 file = "professorInfo.txt";
                 num = checknum.loginCheck(file, ID, PW);
+                loginUser.setName(checknum.getName(file, ID));
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     // 아래 기능은 교수 PF_FistPage에 강의 목록을 띄우기 위한 교수 이름을 넘겨주는 코드입니다.
@@ -258,7 +267,6 @@ public class Login_Page extends javax.swing.JFrame {
                 }
                 
             case 'G':
-                //수업 관리자 화면이랑 정보저장 만들어야함
                 file = "classmanagerInfo.txt";
                 num = checknum.loginCheck(file, ID, PW);
                 if(num == 1) {
@@ -277,7 +285,6 @@ public class Login_Page extends javax.swing.JFrame {
                 }
                 
             case 'H':
-                //학사 관리자 화면이랑 정보저장 만들어야함
                 file = "schoolmanagerInfo.txt";
                 num = checknum.loginCheck(file, ID, PW);
                 if(num == 1) {

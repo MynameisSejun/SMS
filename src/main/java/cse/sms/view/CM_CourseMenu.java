@@ -4,18 +4,22 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
+
 /**
  *
  * @author 원채연
  */
 public class CM_CourseMenu extends javax.swing.JFrame {
 
+    UserData loginUser = UserData.getInstance();
+        
     /**
      * Creates new form CM_CourseMenu
      */
     public CM_CourseMenu() {
         initComponents();
-        setTitle("강좌메뉴");
+        setTitle("강좌메뉴" + loginUser.getID());
         setLocationRelativeTo(null);
 
     }
