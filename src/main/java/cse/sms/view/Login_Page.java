@@ -16,7 +16,7 @@ import java.io.IOException;
  * @author suk22
  */
 public class Login_Page extends javax.swing.JFrame {
-
+    public static String professorName;
     /**
      * Creates new form Frametest
      */
@@ -233,7 +233,7 @@ public class Login_Page extends javax.swing.JFrame {
                 loginUser.setName(checknum.getName(file, ID));
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
-                    //교수 페이지 창 띄우기
+                    //교수 페이지 창 띄우기 -> 교수 페이지 만들어야함
                     PF_FirstPage pf = new PF_FirstPage();
                     pf.setVisible(true);
                     setVisible(false);
