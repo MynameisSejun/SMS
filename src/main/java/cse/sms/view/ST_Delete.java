@@ -7,9 +7,13 @@ package cse.sms.view;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+//import java.io.FileReader;
+//import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
 /**
  *
@@ -127,8 +131,8 @@ public class ST_Delete extends javax.swing.JFrame {
     BufferedWriter writer;
 
     try {
-        reader = new BufferedReader(new FileReader(inputFile));
-        writer = new BufferedWriter(new FileWriter(tempFile));
+        reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+        writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
 
         String line;
         boolean deleted = false; // 삭제 여부 확인을 위한 플래그
