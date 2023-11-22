@@ -18,14 +18,14 @@ import cse.sms.model.Student;
  *
  * @author 원채연
  */
-public class StdClasses extends javax.swing.JFrame {
+public class ST_StudentClass extends javax.swing.JFrame {
 
     int grade = 0;
 
     /**
      * Creates new form StdClasses
      */
-    public StdClasses() {
+    public ST_StudentClass() {
         initComponents();
         setTitle("수강 신청");
         InputclassInfo();   //개설 강의 보이기
@@ -246,7 +246,6 @@ public class StdClasses extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
         int a = 0;  //이상 없으면 0
         int i = jTable1.getSelectedRow();   //몇번째 줄인지
         a += DoubleCheck(i); // 중복 수강 체크

@@ -97,7 +97,7 @@ public class ST_FirstPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        StdClasses st = new StdClasses();
+        ST_StudentClass st = new ST_StudentClass();
         st.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed

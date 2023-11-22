@@ -203,14 +203,5 @@ public class CM_BillIssue extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
-    public static void main(String args[]) {
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CM_BillIssue().setVisible(true);
-            }
-        });
-    }
 
 }
