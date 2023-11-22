@@ -230,6 +230,7 @@ public class Login_Page extends javax.swing.JFrame {
             case 'P':
                 file = "professorInfo.txt";
                 num = checknum.loginCheck(file, ID, PW);
+                loginUser.setName(checknum.getName(file, ID));
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //교수 페이지 창 띄우기
