@@ -29,7 +29,7 @@ import java.io.IOException;
  * @author LG
  */
 public class PF_FirstPage extends javax.swing.JFrame {
-    //UserData loginUser = UserData.getInstance();
+    UserData loginUser = UserData.getInstance();
     
     /**
      * Creates new form PF_LectureList
@@ -53,7 +53,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
 
             while ((line = br.readLine()) != null) {
                 data = line.split(",");
-                if (data[4].equals(Login_Page.professorName)) {
+                if (data[4].equals(loginUser.getName())) {
                     model.addRow(new Object[]{data[0], data[1]});
                 }
             }

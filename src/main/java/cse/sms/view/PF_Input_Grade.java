@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author LG
  */
 public class PF_Input_Grade extends javax.swing.JFrame {
-
+    private String currentLectureNumber; // 현재 선택된 강의 번호를 저장하는 멤버 변수
     /**
      * Creates new form PF_Input_Grade
      */
@@ -31,6 +31,9 @@ public class PF_Input_Grade extends javax.swing.JFrame {
     }
     
     public List<String[]> readStudentClasses(String lectureNumber) throws IOException {
+        
+    this.currentLectureNumber = lectureNumber;
+    
     File file = new File("studentclasses.txt");
     BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
     List<String[]> studentClasses = new ArrayList<>();
@@ -232,7 +235,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
         if (selectedRow != -1) {
             String grade = (String) jComboBox1.getSelectedItem(); // 선택한 성적을 가져옴
             String studentNumber = (String) jTable2.getValueAt(selectedRow, 1); // 선택한 학생의 이름을 가져옴
-            String lectureNumber =null;
+            
                     
             System.out.println("jComboBox1.getSelectedItem(): "+jComboBox1.getSelectedItem());
             System.out.println("jTable2.getValueAt(selectedRow, 1): "+jTable2.getValueAt(selectedRow, 1));
@@ -240,7 +243,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
             try {
                 updateGrade(studentNumber, grade);
                 JOptionPane.showMessageDialog(this, "성적이 입력되었습니다."); // 성적 입력 확인 메시지
-                fillTable(lectureNumber); // 테이블 업데이트 // 테이블 업데이트
+                fillTable(this.currentLectureNumber); // 현재 선택된 강의 번호로 테이블을 업데이트
             } catch (IOException e) {
                 e.printStackTrace();
             }
