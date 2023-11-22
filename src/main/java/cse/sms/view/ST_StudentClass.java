@@ -15,11 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import cse.sms.model.Student;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author 원채연
@@ -252,7 +247,6 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
         int a = 0;  //이상 없으면 0
         int i = jTable1.getSelectedRow();   //몇번째 줄인지
         a += DoubleCheck(i); // 중복 수강 체크
