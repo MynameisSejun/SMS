@@ -202,38 +202,80 @@ public class CM_ClassOpen extends javax.swing.JFrame {
 
     private void classInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classInfoActionPerformed
         // TODO add your handling code here:
-         String filePath = "classopen.txt";
-        ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), pName.getText(), mPeople.getText());
-        CMCheck ck = new CMCheck();
-        
-        boolean idCheck = true;
-        boolean emCheck = true;
-        
-        emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), pName.getText(), mPeople.getText());
-        idCheck = ck.equalCehck2(filePath, cNum.getText());
-        
-       if(emCheck) {
-            if(idCheck) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-//                    String cNum = classCourse.cNum();
-                    String classInfo = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
-                    //if (check == false) 
-                    writer.write(classInfo);
-                    writer.newLine();
-                    JOptionPane.showMessageDialog(null, "저장되었습니다!");
-                    //else if(check == true) 빈칸 있음
-                    dispose();
-                    SM_FirstPage sf = new SM_FirstPage();
-                    sf.setVisible(true);
-                } catch (IOException e) {
-                    e.printStackTrace();
+//         String filePath = "classopen.txt";
+//        ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), pName.getText(), mPeople.getText());
+//        CMCheck ck = new CMCheck();
+//        
+//        boolean idCheck = true;
+//        boolean emCheck = true;
+//        
+//        emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), pName.getText(), mPeople.getText());
+//        idCheck = ck.equalCehck2(filePath, cNum.getText());
+//        
+//       if(emCheck) {
+//            if(idCheck) {
+//                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+////                    String cNum = classCourse.cNum();
+//                    String classInfo = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
+//                    //if (check == false) 
+//                    writer.write(classInfo);
+//                    writer.newLine();
+//                    JOptionPane.showMessageDialog(null, "저장되었습니다!");
+//                    //else if(check == true) 빈칸 있음
+//                    dispose();
+//                    SM_FirstPage sf = new SM_FirstPage();
+//                    sf.setVisible(true);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            } 
+////            else {
+////                JOptionPane.showMessageDialog(null, "중복된 강좌 번호가 있습니다.");
+////            }
+//        }else {
+//            JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
+//        }
+String filePath = "classopen.txt";
+    String classFilePath = "classes.txt";
+    ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), pName.getText(), mPeople.getText());
+    CMCheck ck = new CMCheck();
+
+    boolean emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), pName.getText(), mPeople.getText());
+
+    if (emCheck) {
+        boolean classExists = false;
+        String line;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(classFilePath))) {
+            while ((line = reader.readLine()) != null) {
+                String[] classInfo = line.split(",");
+                if (classInfo.length > 0 && classInfo[0].equals(cNum.getText())) {
+                    classExists = true;
+                    break;
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "중복된 강좌 번호가 있습니다.");
             }
-        }else {
-            JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        if (classExists) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+                String classInfo = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
+                writer.write(classInfo);
+                writer.newLine();
+                JOptionPane.showMessageDialog(null, "저장되었습니다!");
+                dispose();
+                SM_FirstPage sf = new SM_FirstPage();
+                sf.setVisible(true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "유효한 강의 번호가 아닙니다. 다른 강의 번호를 선택해주세요.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
+    }
     }//GEN-LAST:event_classInfoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
