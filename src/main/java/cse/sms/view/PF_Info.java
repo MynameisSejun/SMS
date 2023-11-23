@@ -5,23 +5,27 @@
 package cse.sms.view;
 
 import cse.sms.control.Check;
+import cse.sms.control.UserData;
 import cse.sms.model.Professor;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import java.io.OutputStreamWriter;
 
 /**
  *
  * @author 915
  */
 public class PF_Info extends javax.swing.JFrame {
-
+    UserData loginUser = UserData.getInstance();
     /**
      * Creates new form ProfessorInfo
      */
     public PF_Info() {
         initComponents();
+        setTitle("교수 - 정보 수정ㄴ " + loginUser.getID() + " " + UserData.getName());
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -44,6 +48,7 @@ public class PF_Info extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         pSecretnum2 = new javax.swing.JTextField();
         pMajor = new java.awt.Choice();
+        jButt_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +69,13 @@ public class PF_Info extends javax.swing.JFrame {
 
         jLabel5.setText("-");
 
+        jButt_Back.setText("뒤로");
+        jButt_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_BackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,16 +91,21 @@ public class PF_Info extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(pMajor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                            .addComponent(pName, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pSecretnum, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pMajor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(pNum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(pName, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(pSecretnum, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pSecretnum2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButt_Back)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,13 +124,15 @@ public class PF_Info extends javax.swing.JFrame {
                     .addComponent(pMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pSecretnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(pSecretnum2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pSecretnum2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pSecretnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(jButt_Back)
+                .addContainerGap())
         );
 
         pMajor.add("전산학과");
@@ -139,12 +158,12 @@ public class PF_Info extends javax.swing.JFrame {
         
        if(emCheck) {
             if(idCheck) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+                try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), "utf-8"))) {
                     String scNum = professor.getSecretNum() + "-" + professor.getSecretNum2();
                     String professorInfo = professor.getProfessorId() + "," + professor.getSecretNum2() + "," + professor.getName() + "," + professor.getMajor() + "," + scNum;
                     //if (check == false) 
-                    writer.write(professorInfo);
-                    writer.newLine();
+                    bw.write(professorInfo);
+                    bw.newLine();
                     JOptionPane.showMessageDialog(null, "저장되었습니다!");
                     //else if(check == true) 빈칸 있음
                     dispose();
@@ -161,7 +180,15 @@ public class PF_Info extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
+        // TODO add your handling code here:
+        PF_FirstPage pf = new PF_FirstPage();
+        pf.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButt_BackActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButt_Back;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
