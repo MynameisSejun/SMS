@@ -4,6 +4,7 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,13 +20,13 @@ import javax.swing.JOptionPane;
  * @author suk22
  */
 public class ST_Change extends javax.swing.JFrame {
-
+    UserData loginUser = UserData.getInstance();
     /**
      * Creates new form StudentChange
      */
     public ST_Change() {
         initComponents();
-        setTitle("학생 정보 수정");
+        setTitle("학생 - 학생수정 "+ loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -54,6 +55,7 @@ public class ST_Change extends javax.swing.JFrame {
         sName = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         sMajor = new javax.swing.JTextField();
+        jButt_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +90,13 @@ public class ST_Change extends javax.swing.JFrame {
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonChange(evt);
+            }
+        });
+
+        jButt_Back.setText("뒤로");
+        jButt_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_BackActionPerformed(evt);
             }
         });
 
@@ -138,8 +147,10 @@ public class ST_Change extends javax.swing.JFrame {
                 .addContainerGap(96, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButt_Back)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addGap(25, 25, 25))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,9 +179,11 @@ public class ST_Change extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(newMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButt_Back))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -190,6 +203,13 @@ public class ST_Change extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "학생 정보를 찾을 수 없습니다.");
         }
     }//GEN-LAST:event_ButtonChange
+
+    private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
+        // TODO add your handling code here:
+        SM_StudentMenu pf = new SM_StudentMenu();
+        pf.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButt_BackActionPerformed
     
 public boolean changeStudentInfo(String existingNum, String existingName, String newNum, String newName, String newMajor) {
         String filePath = "studentInfo.txt"; 
@@ -243,40 +263,9 @@ public boolean changeStudentInfo(String existingNum, String existingName, String
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ST_Change.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ST_Change.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ST_Change.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ST_Change.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ST_Change().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButt_Back;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

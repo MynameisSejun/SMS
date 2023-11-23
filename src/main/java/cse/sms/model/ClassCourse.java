@@ -23,6 +23,14 @@ public class ClassCourse {
         this.grade = grade;
         this.infor = infor;
     }
+
+    public ClassCourse(String num, String grade, String infor) {
+        this.num = num;
+        this.grade = grade;
+        this.infor = infor;
+    }
+    
+    
     
     public String getNum() {
         return num;

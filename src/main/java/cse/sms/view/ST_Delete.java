@@ -4,6 +4,7 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,13 +21,13 @@ import javax.swing.JOptionPane;
  * @author 송녕경
  */
 public class ST_Delete extends javax.swing.JFrame {
-
+    UserData loginUser = UserData.getInstance();
     /**
      * Creates new form ST_delete
      */
     public ST_Delete() {
-        initComponents();
-        setTitle("학생 정보 삭제");
+       initComponents();
+        setTitle("학생 - 학생삭제 "+ loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -45,6 +46,7 @@ public class ST_Delete extends javax.swing.JFrame {
         jButtonDelete = new javax.swing.JButton();
         sNum = new javax.swing.JTextField();
         sjNum = new javax.swing.JTextField();
+        jButt_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +61,13 @@ public class ST_Delete extends javax.swing.JFrame {
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDeleteActionPerformed(evt);
+            }
+        });
+
+        jButt_Back.setText("뒤로");
+        jButt_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_BackActionPerformed(evt);
             }
         });
 
@@ -86,8 +95,10 @@ public class ST_Delete extends javax.swing.JFrame {
                 .addContainerGap(138, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButt_Back)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonDelete)
-                .addGap(25, 25, 25))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +114,9 @@ public class ST_Delete extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(sjNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jButtonDelete)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDelete)
+                    .addComponent(jButt_Back))
                 .addGap(14, 14, 14))
         );
 
@@ -122,6 +135,13 @@ public class ST_Delete extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "학생 정보를 찾을 수 없습니다.");
     }
     }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
+        // TODO add your handling code here:
+        SM_StudentMenu pf = new SM_StudentMenu();
+        pf.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButt_BackActionPerformed
 
    public boolean deleteStudentInfo(String deleteName, String deleteResidentNum) {
     String filePath = "studentInfo.txt";
@@ -172,40 +192,10 @@ public class ST_Delete extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ST_Delete.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ST_Delete.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ST_Delete.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ST_Delete.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ST_Delete().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButt_Back;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
