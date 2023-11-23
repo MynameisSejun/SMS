@@ -19,7 +19,7 @@ public class ST_FirstPage extends javax.swing.JFrame {
      */
     public ST_FirstPage() {
         initComponents();
-        setTitle("학생 " + loginUser.getID() + loginUser.getName());
+        setTitle("학생 " + loginUser.getID() + UserData.getName());
         setLocationRelativeTo(null);
     }
 

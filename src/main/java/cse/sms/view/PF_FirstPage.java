@@ -5,20 +5,10 @@
 package cse.sms.view;
 
 import cse.sms.control.UserData;
-import cse.sms.view.Login_Page;
-import cse.sms.view.Login_Page;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.BufferedWriter;
 import javax.swing.table.DefaultTableModel;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -36,9 +26,9 @@ public class PF_FirstPage extends javax.swing.JFrame {
      */
     public PF_FirstPage() {
         initComponents();
+        setTitle("교수 " + loginUser.getID() + UserData.getName());
         setLocationRelativeTo(null);
         fillTable();
-    
     }
     
     private void fillTable() {

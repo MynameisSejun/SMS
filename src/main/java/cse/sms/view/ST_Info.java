@@ -12,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import javax.swing.JOptionPane;
 import cse.sms.control.Check;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -143,12 +145,12 @@ public class ST_Info extends javax.swing.JFrame {
         
         if(emCheck) {
             if(idCheck) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+                try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), "utf-8"))) {
                     String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
                     String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum;
                     //if (check == false) 
-                    writer.write(studentInfo);
-                    writer.newLine();
+                    bw.write(studentInfo);
+                    bw.newLine();
                     JOptionPane.showMessageDialog(null, "저장되었습니다!");
                     //else if(check == true) 빈칸 있음
                     dispose();

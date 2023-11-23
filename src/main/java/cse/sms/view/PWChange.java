@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 
-
 /**
  *
  * @author 915
@@ -45,6 +44,7 @@ public class PWChange extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +61,13 @@ public class PWChange extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("뒤로 가기");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,9 +79,10 @@ public class PWChange extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmNewPasswordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                         .addComponent(newPasswordTextField)
                         .addComponent(currentPasswordTextField)))
@@ -97,16 +105,15 @@ public class PWChange extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        // 이전 로그인 창에서 받아온 아이디를 텍스트 필드에 설정
-        
         // 누구인지 판별해서 읽을 파일 정하기
         char firstChar = loginUser.getID().charAt(0);
         
@@ -115,12 +122,16 @@ public class PWChange extends javax.swing.JFrame {
         switch(firstChar) {
             case 'S':
                 filename = "studentInfo.txt";
+                break;
             case 'P':
                 filename = "professorInfo.txt";
+                break;
             case 'G':
                 filename = "classmanagerInfo.txt";
+                break;
             case 'H':
                 filename = "schoolmanagerInfo.txt";
+                break;
         }
        
             String currentPassword = currentPasswordTextField.getText(); //현재 비번
@@ -128,18 +139,12 @@ public class PWChange extends javax.swing.JFrame {
             String confirmNewPassword = confirmNewPasswordTextField.getText(); // 새 비번 확인
             
             // 현재 비번, 새 비번, 새 비번 확인이 모두 일치하는지 확인
-            if (currentPassword.equals(loginUser.getID()) && newPassword.equals(confirmNewPassword)) {
+            if (currentPassword.equals(loginUser.getPW()) && newPassword.equals(confirmNewPassword)) {
                 // BufferedReader를 사용하여 파일을 읽어 아이디를 비교하여 비밀번호를 변경
                 List<String> lines = new ArrayList<>();
-                try {
-                    /*
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-                    writer.write(newPassword);
-                    writer.close();
-                    */
-                    BufferedReader reader = new BufferedReader(new FileReader(filename));
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8"))){
                     String line;
-                    while ((line = reader.readLine()) != null) {
+                    while ((line = br.readLine()) != null) {
                         String[] data = line.split(",");
                         String savedID = data[0];
                         String savedPassword = data[1];
@@ -149,7 +154,6 @@ public class PWChange extends javax.swing.JFrame {
                         }
                         lines.add(String.join(",", data)); // 변경된 데이터를 리스트에 추가
                     }
-                    reader.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -171,15 +175,39 @@ public class PWChange extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "비밀번호 변경에 실패했습니다. 입력한 정보를 다시 확인해주세요.");
             }
-         
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        char firstChar = loginUser.getID().charAt(0);
+        switch(firstChar) {
+            case 'S':
+                dispose();
+                ST_FirstPage st = new ST_FirstPage();
+                st.setVisible(true);
+                break;
+            case 'P':
+                dispose();
+                PF_FirstPage pf= new PF_FirstPage();
+                pf.setVisible(true);
+                break;
+            case 'G':
+                dispose();
+                CM_FirstPage cm = new CM_FirstPage();
+                cm.setVisible(true);
+                break;
+            case 'H':
+                dispose();
+                SM_FirstPage sm = new SM_FirstPage();
+                sm.setVisible(true);
+                break;
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField confirmNewPasswordTextField;
     private javax.swing.JTextField currentPasswordTextField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

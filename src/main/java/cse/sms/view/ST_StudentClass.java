@@ -276,6 +276,9 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        dispose();
+        ST_FirstPage st = new ST_FirstPage();
+        st.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

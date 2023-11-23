@@ -180,12 +180,14 @@ public class Login_Page extends javax.swing.JFrame {
         loginUser.setID(ID);
         loginUser.setPW(PW);
         
+        System.out.println("시험");
+        
         switch (first_munja) {
             case 'S':
                 String file = "studentInfo.txt";
                 num = checknum.loginCheck(file, ID, PW);
                 loginUser.setName(checknum.getName(file, ID));
-                System.out.println(loginUser.getName());
+                System.out.println(UserData.getName());
                 if(num == 1) {
                     JOptionPane.showMessageDialog(null, "로그인에 성공했습니다.");
                     //학생 페이지 창 띄우기
