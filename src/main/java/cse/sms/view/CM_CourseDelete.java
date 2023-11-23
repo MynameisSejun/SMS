@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author 원채연
  */
-public class CM_CouseDelete extends javax.swing.JFrame {
+public class CM_CourseDelete extends javax.swing.JFrame {
 
     /**
      * Creates new form CM_CouseDelete
      */
-    public CM_CouseDelete() {
+    public CM_CourseDelete() {
         initComponents();
         setTitle("강좌삭제");
         setLocationRelativeTo(null);
@@ -129,7 +129,7 @@ public class CM_CouseDelete extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(null, "강좌 정보를 찾을 수 없습니다.");
     }
-    }//GEN-LAST:event_jButtonDeleteActionPerformed
+    }                                             
  public boolean deletecourseInfo(String deleteNum, String deleteResidentName) {
     String filePath = "classes.txt";
     File inputFile = new File(filePath);

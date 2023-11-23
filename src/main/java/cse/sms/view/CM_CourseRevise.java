@@ -4,6 +4,16 @@
  */
 package cse.sms.view;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author 원채연
@@ -29,59 +39,49 @@ public class CM_CourseRevise extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        newNum = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        newName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        newGrade = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        newInfo = new javax.swing.JTextField();
+        jButtonInfo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        cNum = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        cName = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel1.setText("강좌 번호");
 
-        jTextField1.setText("jTextField1");
-
         jLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel2.setText("강좌명");
-
-        jTextField2.setText("jTextField1");
 
         jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel3.setText("학점");
 
-        jTextField3.setText("jTextField1");
-
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel4.setText("설명");
 
-        jTextField4.setText("jTextField1");
-
-        jButton1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jButton1.setText("등록");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonInfo.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        jButtonInfo.setText("등록");
+        jButtonInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonInfoActionPerformed(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel5.setText("강좌 번호");
 
-        jTextField5.setText("jTextField1");
-
         jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel6.setText("강좌명");
-
-        jTextField6.setText("jTextField1");
 
         jButton2.setText("뒤로 가기");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +89,12 @@ public class CM_CourseRevise extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jLabel7.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        jLabel7.setText("변경할 정보");
+
+        jLabel8.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        jLabel8.setText("기존 정보");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,50 +111,61 @@ public class CM_CourseRevise extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(newName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newGrade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(newNum, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(30, 30, 30)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonInfo)))
                 .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newNum, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
                                 .addGap(25, 25, 25)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(28, 28, 28)
                         .addComponent(jButton2)
@@ -156,11 +173,11 @@ public class CM_CourseRevise extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cNum, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
@@ -168,10 +185,73 @@ public class CM_CourseRevise extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInfoActionPerformed
+        String existingNum = cNum.getText(); // 기존 강좌 번호
+        String existingName = cName.getText(); // 기존 강좌명
+        String newNumText = newNum.getText(); // 변경할 학번
+        String newNameText = newName.getText(); // 변경할 이름
+        String newGradeText = newGrade.getText(); // 변경할 학점
+        String newInfoText = newInfo.getText(); // 변경할 정보
 
+        boolean changed = changeCourseInfo(existingNum, existingName, newNumText, newNameText, newGradeText, newInfoText);
+        if (changed) {
+            JOptionPane.showMessageDialog(null, "강좌 정보가 수정되었습니다.");
+        } else {
+            JOptionPane.showMessageDialog(null, "강좌 정보를 찾을 수 없습니다.");
+        }
+    }//GEN-LAST:event_jButtonInfoActionPerformed
+public boolean changeCourseInfo(String existingNum, String existingName, String newNum, String newName, String newGrade, String newInfoText) {
+        String filePath = "classes.txt"; 
+        File inputFile = new File(filePath);
+        File tempFile = new File("temp.txt");
+        BufferedReader reader;
+        BufferedWriter writer;
+
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+
+            String line;
+            boolean changed = false; // 수정 여부 확인
+
+            while ((line = reader.readLine()) != null) {
+                String[] userInfo = line.split(",");
+                 if (userInfo.length == 6) {
+                String storedNum = userInfo[0].trim();
+                String storedName = userInfo[1].trim();
+                String storedGrade = userInfo[2].trim();
+                String storedInfo = userInfo[5].trim();
+
+        if (storedNum.equals(existingNum) && storedName.equals(existingName)) {
+            // 기존 정보와 일치하는 학생 정보를 찾은 경우
+            line = newNum + "," + newName + "," + newGrade + "," + userInfo[3]+ "," + userInfo[4] + "," + newInfoText; // 강좌 정보 출력
+            changed = true; // 수정 플래그를 true로 설정하여 수정 여부를 확인
+        }
+    }
+
+                writer.write(line);
+                writer.newLine();
+            }
+
+            writer.close();
+            reader.close();
+
+            if (changed) {
+                // 기존 파일 삭제하고 임시 파일 이름 변경
+                inputFile.delete();
+                tempFile.renameTo(inputFile);
+                return true;
+            } else {
+                // 수정할 학생 정보가 없는 경우 임시 파일 삭제
+                tempFile.delete();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // 뒤로 가기
         CM_CourseMenu cm = new CM_CourseMenu();
@@ -181,19 +261,21 @@ public class CM_CourseRevise extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField cName;
+    private javax.swing.JTextField cNum;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField newGrade;
+    private javax.swing.JTextField newInfo;
+    private javax.swing.JTextField newName;
+    private javax.swing.JTextField newNum;
     // End of variables declaration//GEN-END:variables
 }

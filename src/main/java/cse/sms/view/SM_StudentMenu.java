@@ -106,14 +106,23 @@ public class SM_StudentMenu extends javax.swing.JFrame {
 
     private void FixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FixActionPerformed
         // TODO add your handling code here:
+        ST_Change st =  new ST_Change();
+        st.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_FixActionPerformed
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
+        ST_Query st =  new ST_Query();
+        st.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_SearchActionPerformed
 
     private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
         // TODO add your handling code here:
+        ST_Delete st = new ST_Delete();
+        st.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_DeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

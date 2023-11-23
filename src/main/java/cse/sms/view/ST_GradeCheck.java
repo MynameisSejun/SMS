@@ -4,10 +4,13 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,21 +18,23 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author 원채연
  */
-public class GradeCheck extends javax.swing.JFrame {
-
+public class ST_GradeCheck extends javax.swing.JFrame {
+    
+    UserData loginUser = UserData.getInstance();
+    
     /**
      * Creates new form GradeCheck
      */
-    public GradeCheck() {
+    public ST_GradeCheck() {
         initComponents();
-        setTitle("성적 확인");
+        setTitle("성적 확인" + loginUser.getID() + loginUser.getName());
         InputstdInfo();
         getSum();
     }
 
     private void InputstdInfo() {    //학생 수강 내역 파일에서 출력
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("studentclasses.txt"));
+        String file = "studentclasses.txt";
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))){
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] tableLines = br.lines().toArray();    //txt파일에서 몇줄인지 가져오기
 
@@ -57,36 +62,21 @@ public class GradeCheck extends javax.swing.JFrame {
         for (int i = 0; i < jTable1.getRowCount(); i++) {
             score = jTable1.getValueAt(i, 3).toString();
             switch (score) {
-                case "A+":
-                    sum += 4.5;
-                    break;
-
-                case "A0":
+                case "A":
                     sum += 4.0;
                     break;
-
-                case "B+":
-                    sum += 3.5;
-                    break;
-
-                case "B0":
+                case "B":
                     sum += 3.0;
                     break;
-
-                case "C+":
-                    sum += 2.5;
-                    break;
-
-                case "C0":
+                case "C":
                     sum += 2.0;
                     break;
-
-                case "D+":
-                    sum += 1.5;
+                case "D":
+                    sum += 1.0;
                     break;
 
-                case "D0":
-                    sum += 1.0;
+                case "F":
+                    sum += 0;
                 default:
                     break;
 
@@ -111,6 +101,7 @@ public class GradeCheck extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,9 +131,14 @@ public class GradeCheck extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jTextField1.setText("jTextField1");
-
         jLabel1.setText("평균 학점");
+
+        jButton1.setText("뒤로 가기");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +150,9 @@ public class GradeCheck extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -166,14 +164,23 @@ public class GradeCheck extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1))
                 .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        ST_FirstPage st = new ST_FirstPage();
+        st.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
