@@ -90,7 +90,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
                 lines.add(line);
             }
         }
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"))) {
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "UTF-8"))) {
             for (String line : lines) {
                 bw.write(line);
                 bw.newLine();
