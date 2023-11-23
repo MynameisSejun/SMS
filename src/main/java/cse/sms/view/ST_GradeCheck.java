@@ -28,13 +28,15 @@ public class ST_GradeCheck extends javax.swing.JFrame {
     public ST_GradeCheck() {
         initComponents();
         setTitle("성적 확인" + loginUser.getID() + loginUser.getName());
+        setLocationRelativeTo(null);
         InputstdInfo();
         getSum();
+
     }
 
     private void InputstdInfo() {    //학생 수강 내역 파일에서 출력
         String file = "studentclasses.txt";
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))){
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"))){
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             Object[] tableLines = br.lines().toArray();    //txt파일에서 몇줄인지 가져오기
 

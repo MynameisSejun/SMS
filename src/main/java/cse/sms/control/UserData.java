@@ -12,6 +12,7 @@ public class UserData {
     private static String ID;
     private static String PW;
     private static String name;
+    private static String grade;
     private static UserData userdata;
     
     public UserData() {
@@ -37,6 +38,10 @@ public class UserData {
         UserData.name = name;
     }
 
+    public static void setGrade(String grade) {
+        UserData.grade = grade;
+    }
+
     public String getID() {
         return ID;
     }
@@ -48,4 +53,9 @@ public class UserData {
     public static String getName() {
         return name;
     }
+    
+    public static String getGrade(){
+        return grade;
+    }
+
 }

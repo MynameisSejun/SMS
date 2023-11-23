@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 import cse.sms.view.CM_BillIssue;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 
 /**
@@ -16,13 +19,12 @@ import java.util.Arrays;
  * @author 원채연
  */
 public class CM_BIllprint extends javax.swing.JFrame {
-
     int sum = 0;
     String stdnum;
 
     public void setBill(String stdnum) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("studentclasses.txt"));
+        File file = new File("studentclasses.txt");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             String temp;
             while ((temp = br.readLine()) != null) {
@@ -117,11 +119,13 @@ public class CM_BIllprint extends javax.swing.JFrame {
             }
         });
         jTable1.setAlignmentX(1.0F);
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTable1.setRowSelectionAllowed(false);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
@@ -190,6 +194,7 @@ public class CM_BIllprint extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
