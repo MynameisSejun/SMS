@@ -10,6 +10,7 @@ package cse.sms.control;
  */
 public class UserData {
     private static String ID;
+    private static String PW;
     private static String name;
     private static UserData userdata;
     
@@ -28,12 +29,20 @@ public class UserData {
         UserData.ID = ID;
     }
 
+    public static void setPW(String PW) {
+        UserData.PW = PW;
+    }
+
     public static void setName(String name) {
         UserData.name = name;
     }
 
     public String getID() {
         return ID;
+    }
+
+    public static String getPW() {
+        return PW;
     }
 
     public static String getName() {

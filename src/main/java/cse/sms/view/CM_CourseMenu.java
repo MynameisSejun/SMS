@@ -124,7 +124,7 @@ public class CM_CourseMenu extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // 강좌 삭제
-        CM_CouseDelete cd = new CM_CouseDelete();
+        CM_CourseDelete cd = new CM_CourseDelete();
         cd.setVisible(true);
         setVisible(false);
         dispose();
