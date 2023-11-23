@@ -4,6 +4,7 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,19 +22,30 @@ import javax.swing.table.DefaultTableModel;
  * @author LG
  */
 public class PF_Input_Grade extends javax.swing.JFrame {
-    private String currentLectureNumber; // 현재 선택된 강의 번호를 저장하는 멤버 변수
+    UserData loginUser = UserData.getInstance();
     /**
      * Creates new form PF_Input_Grade
      */
     public PF_Input_Grade() {
         initComponents();
+        setTitle("교수 - 성적 입력 " + loginUser.getID() + " " + UserData.getName());
         setLocationRelativeTo(null);
+    }
+    
+     private String lectureNumber;
+    private String lectureName;
+    
+    public PF_Input_Grade(String lectureNumber, String lectureName) { // 'studentclasses.txt' 파일에서 데이터를 읽어옴
+        this.lectureNumber = lectureNumber;
+        this.lectureName = lectureName;
+        initComponents();
+        setTitle("교수 - 성적입력 " + loginUser.getID() + " " + UserData.getName());
+        setLocationRelativeTo(null);
+        // 강의 번호와 강의명을 사용하여 수강생 목록을 불러올 수 있음.
     }
     
     public List<String[]> readStudentClasses(String lectureNumber) throws IOException {
         
-    this.currentLectureNumber = lectureNumber;
-    
     File file = new File("studentclasses.txt");
     BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
     List<String[]> studentClasses = new ArrayList<>();
@@ -42,7 +54,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
         String[] data = line.split(",");
         
         if (data.length < 3) { // 필요한 필드가 모두 있는지 확인
-            continue; // 필드가 부족한 행은 건너뜁니다.
+            continue; // 필드가 부족한 행은 건너뜀.
         }
         
         if (data[2].equals(lectureNumber)) {
@@ -53,7 +65,6 @@ public class PF_Input_Grade extends javax.swing.JFrame {
     return studentClasses;
 }
 
-    
     public void fillTable(String lectureNumber) {
     DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
     model.setRowCount(0); // 테이블의 모든 행을 삭제
@@ -69,8 +80,6 @@ public class PF_Input_Grade extends javax.swing.JFrame {
     
     private void updateGrade(String studentNumber, String newGrade) throws IOException {
         
-        System.out.println("업데이트 실행됨.");
-        
         File file = new File("studentclasses.txt");
         List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
@@ -78,26 +87,24 @@ public class PF_Input_Grade extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 
-                System.out.println("data[1]: "+data[1]);
-                boolean T = data.length >= 2 && data[1].equals(studentNumber);
-                System.out.println("data.length >= 2 && data[1].equals(studentNumber): "+T);
-                
                 if (data.length >= 2 && data[1].equals(studentNumber)) {
                     data[8] = newGrade; // 성적 업데이트
-                    System.out.println("data[8]: "+data[8]);
                     line = String.join(",", data);
                 }
                 lines.add(line);
             }
         }
+<<<<<<< HEAD
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, false), "UTF-8"))) {
+=======
         try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "UTF-8"))) {
+>>>>>>> 0d930cc3ee0c2b133a0226f99ca91b55218d02df
             for (String line : lines) {
                 bw.write(line);
                 bw.newLine();
             }
         }
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -236,14 +243,10 @@ public class PF_Input_Grade extends javax.swing.JFrame {
             String grade = (String) jComboBox1.getSelectedItem(); // 선택한 성적을 가져옴
             String studentNumber = (String) jTable2.getValueAt(selectedRow, 1); // 선택한 학생의 이름을 가져옴
             
-                    
-            System.out.println("jComboBox1.getSelectedItem(): "+jComboBox1.getSelectedItem());
-            System.out.println("jTable2.getValueAt(selectedRow, 1): "+jTable2.getValueAt(selectedRow, 1));
-            
             try {
                 updateGrade(studentNumber, grade);
                 JOptionPane.showMessageDialog(this, "성적이 입력되었습니다."); // 성적 입력 확인 메시지
-                fillTable(this.currentLectureNumber); // 현재 선택된 강의 번호로 테이블을 업데이트
+                fillTable(lectureNumber); // 현재 선택된 강의 번호로 테이블을 업데이트
             } catch (IOException e) {
                 e.printStackTrace();
             }

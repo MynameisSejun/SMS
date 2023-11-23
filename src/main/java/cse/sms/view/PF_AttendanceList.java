@@ -4,6 +4,7 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,13 +19,27 @@ import javax.swing.table.DefaultTableModel;
  * @author LG
  */
 public class PF_AttendanceList extends javax.swing.JFrame {
-
+    UserData loginUser = UserData.getInstance();
     /**
      * Creates new form PF_AttendanceList
      */
     public PF_AttendanceList() {
         initComponents();
+        setTitle("교수 - 출석부 " + loginUser.getID() + " " + UserData.getName());
         setLocationRelativeTo(null);
+    }
+    
+    private String lectureNumber;
+    private String lectureName;
+    
+    public PF_AttendanceList(String lectureNumber, String lectureName) { // 'studentclasses.txt' 파일에서 데이터를 읽어옴
+        this.lectureNumber = lectureNumber;
+        this.lectureName = lectureName;
+        initComponents();
+        setTitle("교수 - 수강생 목록 " + loginUser.getID() + " " + UserData.getName());
+        setLocationRelativeTo(null);
+        fillTable(lectureNumber); // 이 부분이 추가되었습니다.
+        // 이제 강의 번호와 강의명을 사용하여 수강생 목록을 불러올 수 있습니다.
     }
     
     public List<String[]> readStudentClasses(String lectureNumber) throws IOException {
@@ -132,7 +146,7 @@ public class PF_AttendanceList extends javax.swing.JFrame {
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
         PF_FirstPage pf = new PF_FirstPage();
         pf.setVisible(true);
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
