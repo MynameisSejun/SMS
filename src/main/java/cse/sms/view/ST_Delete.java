@@ -26,8 +26,8 @@ public class ST_Delete extends javax.swing.JFrame {
      * Creates new form ST_delete
      */
     public ST_Delete() {
-       initComponents();
-        setTitle("학생 - 학생삭제 "+ loginUser.getID());
+        initComponents();
+        setTitle("학생 - 학생삭제 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 

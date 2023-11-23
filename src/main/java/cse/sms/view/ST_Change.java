@@ -20,13 +20,15 @@ import javax.swing.JOptionPane;
  * @author suk22
  */
 public class ST_Change extends javax.swing.JFrame {
+
     UserData loginUser = UserData.getInstance();
+
     /**
      * Creates new form StudentChange
      */
     public ST_Change() {
         initComponents();
-        setTitle("학생 - 학생수정 "+ loginUser.getID());
+        setTitle("학생 - 학생수정 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -202,6 +204,9 @@ public class ST_Change extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "학생 정보를 찾을 수 없습니다.");
         }
+        SM_ProfessorMenu pf = new SM_ProfessorMenu();
+        pf.setVisible(true);
+        dispose();
     }//GEN-LAST:event_ButtonChange
 
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
@@ -210,9 +215,9 @@ public class ST_Change extends javax.swing.JFrame {
         pf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
-    
-public boolean changeStudentInfo(String existingNum, String existingName, String newNum, String newName, String newMajor) {
-        String filePath = "studentInfo.txt"; 
+
+    public boolean changeStudentInfo(String existingNum, String existingName, String newNum, String newName, String newMajor) {
+        String filePath = "studentInfo.txt";
         File inputFile = new File(filePath);
         File tempFile = new File("temp.txt");
         BufferedReader reader;
@@ -259,7 +264,7 @@ public boolean changeStudentInfo(String existingNum, String existingName, String
 
         return false;
     }
-    
+
     /**
      * @param args the command line arguments
      */
