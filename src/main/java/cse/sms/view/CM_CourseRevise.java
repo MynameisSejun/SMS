@@ -4,6 +4,7 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,13 +20,13 @@ import javax.swing.JOptionPane;
  * @author 원채연
  */
 public class CM_CourseRevise extends javax.swing.JFrame {
-
+UserData loginUser = UserData.getInstance();
     /**
      * Creates new form CM_CourseRevise
      */
     public CM_CourseRevise() {
         initComponents();
-        setTitle("강좌수정");
+        setTitle("수업담당자 - 강좌수정" + loginUser.getID());
         setLocationRelativeTo(null);
     }
 

@@ -4,12 +4,17 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,13 +22,13 @@ import javax.swing.JOptionPane;
  * @author 원채연
  */
 public class CM_CourseDelete extends javax.swing.JFrame {
-
+    UserData loginUser = UserData.getInstance();
     /**
      * Creates new form CM_CouseDelete
      */
     public CM_CourseDelete() {
         initComponents();
-        setTitle("강좌삭제");
+        setTitle("수업담당자 - 강좌삭제 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -138,8 +143,8 @@ public class CM_CourseDelete extends javax.swing.JFrame {
     BufferedWriter writer;
 
     try {
-        reader = new BufferedReader(new FileReader(inputFile));
-        writer = new BufferedWriter(new FileWriter(tempFile));
+        reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+        writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
 
         String line;
         boolean deleted = false; // 삭제 여부 확인을 위한 플래그

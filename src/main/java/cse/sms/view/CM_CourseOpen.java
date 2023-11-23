@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import cse.sms.control.UserData;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -192,38 +194,39 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          String filePath = "classes.txt";
-        ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), cGrade.getText(), cInfor.getText());
-        CMCheck ck = new CMCheck();
+        System.out.println("test");
+        String filePath = "classes.txt";
         
-        boolean idCheck = true;
-        boolean emCheck = true;
-        
-        emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), cGrade.getText(), cInfor.getText());
-        idCheck = ck.equalCehck2(filePath, cNum.getText());
-        
-       if(emCheck) {
-            if(idCheck) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-//                    String cNum = classCourse.cNum();
-                    String classInfo = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
-                    //if (check == false) 
-                    writer.write(classInfo);
-                    writer.newLine();
-                    JOptionPane.showMessageDialog(null, "저장되었습니다!");
-                    //else if(check == true) 빈칸 있음
-                    dispose();
-                    SM_FirstPage sf = new SM_FirstPage();
-                    sf.setVisible(true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "중복된 강좌 번호가 있습니다.");
+    ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), cGrade.getText(), cInfor.getText());
+    CMCheck ck = new CMCheck();
+    
+    boolean idCheck = true;
+    boolean emCheck = true;
+    
+    emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), cGrade.getText(), cInfor.getText());
+    System.out.println("test1");
+    idCheck = ck.equalCehck2(filePath, cNum.getText()); // 문제
+    System.out.println("test2");
+    
+    if (emCheck) {
+        if (idCheck) {
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), "UTF-8"))) {
+                String classInfo = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
+                bw.write(classInfo);
+                bw.newLine();
+                JOptionPane.showMessageDialog(null, "저장되었습니다!");
+                dispose();
+                SM_FirstPage sf = new SM_FirstPage();
+                sf.setVisible(true);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }else {
-            JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
+        } else {
+            JOptionPane.showMessageDialog(null, "중복된 강좌 번호가 있습니다.");
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
