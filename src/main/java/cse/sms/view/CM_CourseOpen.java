@@ -26,7 +26,7 @@ public class CM_CourseOpen extends javax.swing.JFrame {
      */
     public CM_CourseOpen() {
         initComponents();
-        setTitle("강좌개설" + loginUser.getID());
+        setTitle("수업담당자 - 강좌개설" + loginUser.getID());
         setLocationRelativeTo(null);
     }
 

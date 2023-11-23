@@ -19,7 +19,7 @@ public class CM_CourseMenu extends javax.swing.JFrame {
      */
     public CM_CourseMenu() {
         initComponents();
-        setTitle("강좌메뉴" + loginUser.getID());
+        setTitle("수업담당자 - 강좌메뉴 " + loginUser.getID());
         setLocationRelativeTo(null);
 
     }
