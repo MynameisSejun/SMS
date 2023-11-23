@@ -4,6 +4,7 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,12 +19,15 @@ import javax.swing.table.DefaultTableModel;
  * @author LG
  */
 public class PF_StudentList extends javax.swing.JFrame {
-
+     UserData loginUser = UserData.getInstance();
+     
     /**
      * Creates new form PF_StudentList
      */
     public PF_StudentList() {
         initComponents();
+        setTitle("교수 - 수강생 목록 " + loginUser.getID() + " " + UserData.getName());
+        setLocationRelativeTo(null);
         
     }
     
@@ -143,7 +147,7 @@ public class PF_StudentList extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         PF_FirstPage pf = new PF_FirstPage();
         pf.setVisible(true);
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
