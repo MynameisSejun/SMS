@@ -28,10 +28,6 @@ public class PF_StudentList extends javax.swing.JFrame {
         initComponents();
         setTitle("교수 - 수강생 목록 " + loginUser.getID() + " " + UserData.getName());
         setLocationRelativeTo(null);
-<<<<<<< HEAD
-=======
-        
->>>>>>> 0d930cc3ee0c2b133a0226f99ca91b55218d02df
     }
     
     private String lectureNumber;
