@@ -24,6 +24,17 @@ public class CMCheck {
         }
         return isEmpty; 
     }
+      public boolean emptyCheck2(String num, String grade, String infor) { //정보 저장할 때 빈칸 체크할려고 만들긴 햇는데 안돌아가는듯
+        String[] check = {num, grade, infor};
+        boolean isEmpty = true;
+        for(int i = 0; i < check.length; i++) {
+            if(check[i].isEmpty()) {
+                isEmpty = false;
+                break;
+            }
+        }
+        return isEmpty; 
+    }
     
     public boolean equalCehck2(String filePath, String ID) {
         boolean check = true;

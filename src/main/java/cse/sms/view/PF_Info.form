@@ -35,11 +35,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="pMajor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="pNum" alignment="0" pref="100" max="32767" attributes="0"/>
-                          <Component id="pName" alignment="0" max="32767" attributes="0"/>
-                          <Component id="pSecretnum" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="pMajor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="pNum" alignment="0" pref="100" max="32767" attributes="0"/>
+                              <Component id="pName" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="pSecretnum" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -48,6 +50,11 @@
                   </Group>
               </Group>
               <EmptySpace pref="32" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButt_Back" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,14 +78,16 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="pSecretnum" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pSecretnum2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pSecretnum" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="96" max="32767" attributes="0"/>
+              <EmptySpace pref="67" max="32767" attributes="0"/>
+              <Component id="jButt_Back" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -129,6 +138,14 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="pMajor.add(&quot;&#xc804;&#xc0b0;&#xd559;&#xacfc;&quot;);&#xa;pMajor.add(&quot;&#xc804;&#xc790;&#xacf5;&#xd559;&#xacfc;&quot;);&#xa;pMajor.add(&quot;&#xd654;&#xd559;&#xacf5;&#xd559;&#xacfc;&quot;);&#xa;pMajor.add(&quot;&#xae30;&#xacc4;&#xacf5;&#xd559;&#xacfc;&quot;);&#xa;pMajor.add(&quot;&#xd56d;&#xacf5;&#xc6b0;&#xc8fc;&#xacf5;&#xd559;&#xacfc;&quot;);"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButt_Back">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xb4a4;&#xb85c;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButt_BackActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
