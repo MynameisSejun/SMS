@@ -225,7 +225,7 @@ public class CM_ClassOpen extends javax.swing.JFrame {
             writer.newLine();
             JOptionPane.showMessageDialog(null, "저장되었습니다!");
             dispose();
-            SM_FirstPage sf = new SM_FirstPage();
+            CM_FirstPage sf = new CM_FirstPage();
             sf.setVisible(true);
         } catch (IOException e) {
             e.printStackTrace();

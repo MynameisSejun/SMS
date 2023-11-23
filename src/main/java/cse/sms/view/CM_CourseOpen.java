@@ -28,7 +28,7 @@ public class CM_CourseOpen extends javax.swing.JFrame {
      */
     public CM_CourseOpen() {
         initComponents();
-        setTitle("수업담당자 - 강좌개설" + loginUser.getID());
+        setTitle("수업담당자 - 강좌개설 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -204,9 +204,7 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     boolean emCheck = true;
     
     emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), cGrade.getText(), cInfor.getText());
-    System.out.println("test1");
     idCheck = ck.equalCehck2(filePath, cNum.getText()); // 문제
-    System.out.println("test2");
     
     if (emCheck) {
         if (idCheck) {
