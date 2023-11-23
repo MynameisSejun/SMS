@@ -204,13 +204,10 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     boolean emCheck = true;
     
     emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), cGrade.getText(), cInfor.getText());
-<<<<<<< HEAD
-    idCheck = ck.equalCehck2(filePath, cNum.getText()); // 문제
-=======
+
     System.out.println("test1");
     idCheck = ck.equalCehck2(filePath, cNum.getText()); // 문제
     System.out.println("test2");
->>>>>>> 1b5b4acbd29635979b2bdd80957839390e5905cb
     
     if (emCheck) {
         if (idCheck) {
