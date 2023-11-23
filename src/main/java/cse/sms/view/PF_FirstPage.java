@@ -26,7 +26,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
      */
     public PF_FirstPage() {
         initComponents();
-        setTitle("교수 " + loginUser.getID() + UserData.getName());
+        setTitle("교수 " + loginUser.getID() + " " + UserData.getName());
         setLocationRelativeTo(null);
         fillTable();
     }
