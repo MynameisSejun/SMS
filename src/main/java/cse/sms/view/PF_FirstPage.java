@@ -54,8 +54,6 @@ public class PF_FirstPage extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,7 +167,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
         PF_StudentList pf = new PF_StudentList(lectureNumber, lectureName);
         pf.fillTable(lectureNumber);
         pf.setVisible(true);
-        setVisible(false);
+        dispose();
     } else {
         // 행이 선택되지 않았다면, 사용자에게 알림을 표시.
         JOptionPane.showMessageDialog(this, "강의를 선택해주세요.");
@@ -181,10 +179,11 @@ public class PF_FirstPage extends javax.swing.JFrame {
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
         String lectureNumber = (String) jTable1.getValueAt(selectedRow, 0);
-        PF_Input_Grade pf = new PF_Input_Grade();
+        String lectureName = (String) jTable1.getValueAt(selectedRow, 1);
+        PF_Input_Grade pf = new PF_Input_Grade(lectureNumber, lectureName);
         pf.fillTable(lectureNumber);
         pf.setVisible(true);
-        setVisible(false);
+        dispose();
     } else {
         JOptionPane.showMessageDialog(this, "강의를 선택해주세요.");
     }
@@ -195,20 +194,20 @@ public class PF_FirstPage extends javax.swing.JFrame {
         int selectedRow = jTable1.getSelectedRow();
     if (selectedRow != -1) {
         String lectureNumber = (String) jTable1.getValueAt(selectedRow, 0);
-        PF_AttendanceList pf = new PF_AttendanceList();
+        String lectureName = (String) jTable1.getValueAt(selectedRow, 1);
+        PF_AttendanceList pf = new PF_AttendanceList(lectureNumber, lectureName);
         pf.fillTable(lectureNumber);
         pf.setVisible(true);
-        setVisible(false);
+        dispose();
     } else {
         JOptionPane.showMessageDialog(this, "강의를 선택해주세요.");
     }
-    
     }//GEN-LAST:event_jButt_AttendanceListActionPerformed
 
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
         Login_Page pf = new Login_Page();
         pf.setVisible(true);
-        setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
