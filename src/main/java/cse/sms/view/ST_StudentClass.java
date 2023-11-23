@@ -14,7 +14,7 @@ import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import cse.sms.model.Student;
+import java.util.Arrays;
 
 /**
  *
@@ -23,7 +23,6 @@ import cse.sms.model.Student;
 public class ST_StudentClass extends javax.swing.JFrame {
 
     UserData loginUser = UserData.getInstance();
-    int grade = 0;
 
     /**
      * Creates new form StdClasses
@@ -31,13 +30,16 @@ public class ST_StudentClass extends javax.swing.JFrame {
     public ST_StudentClass() {
         initComponents();
         setTitle("수강 신청" + loginUser.getID() + loginUser.getName());
-        InputclassInfo();   //개설 강의 보이기
-        InputstdInfo();     //현재 신청 내역 보이기
+        PrintclassInfo();   //개설 강의 보이기
+        PrintStdInfo();     //현재 신청 내역 보이기
+        setLocationRelativeTo(null);
+
     }
 
-    private void InputclassInfo() {  //강의 가능 수업 목록
+    private void PrintclassInfo() {  //강의 가능 수업 목록
+
         File file = new File("classes.txt");
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));){
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             String temp;
             while ((temp = br.readLine()) != null) {
@@ -50,22 +52,45 @@ public class ST_StudentClass extends javax.swing.JFrame {
         }
     }
 
-    private void OutputstdInfo() {    //학생 수강 내역 파일로 입력
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("studentclasses.txt", true))){
+    private void SaveStdInfo() {    //학번,이름 저장
+        File file = new File("studentclasses.txt");
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "utf-8"))) {
             String stdnum = loginUser.getID();
             String name = loginUser.getName();
-            
             bw.write(stdnum + "," + name + ",");
-            bw.flush();
 
         } catch (Exception ex) {
             ex.getStackTrace();
         }
-
     }
 
-    private void OutputstdclassInfo(int i) {    //학생 수강 내역 파일로 입력
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("studentclasses.txt", true))){
+    private void SaveGradeInfo() {    //학점 저장
+
+        File file2 = new File("studentInfo.txt");   //학점 저장
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file2), "UTF-8"))) {
+            String temp;
+            while ((temp = br.readLine()) != null) {
+                String[] dataRow = temp.split(",");
+
+                System.out.println(Arrays.toString(dataRow) + "======");
+
+                if (dataRow[0].equals(loginUser.getID())) {
+                    dataRow[5] = loginUser.getGrade(); // 성적 업데이트
+
+                    System.out.println("성적 업데이트 : " + dataRow[5]);
+
+                    temp = String.join(",", dataRow);
+                }
+            }
+        } catch (Exception ex) {
+            ex.getStackTrace();
+        }
+    }
+
+    private void SaveStdclassInfo(int i) {    //수강 내역 저장
+
+        File file = new File("studentclasses.txt");
+        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "utf-8"))) {
             for (int j = 0; j < jTable1.getColumnCount(); j++) {
                 bw.write(jTable1.getValueAt(i, j).toString() + ",");
             }
@@ -76,9 +101,9 @@ public class ST_StudentClass extends javax.swing.JFrame {
         }
     }
 
-    private void InputstdInfo() {    //학생 수강 내역 파일에서 출력
+    private void PrintStdInfo() {    //학생 수강 내역 띄우기
         String file = "studentclasses.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(file))){          
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.setNumRows(0);    //Row 0해서 리셋
 
@@ -86,16 +111,16 @@ public class ST_StudentClass extends javax.swing.JFrame {
             while ((temp = br.readLine()) != null) {
                 String[] dataRow = temp.split(",");
                 String inputStr[] = new String[6];
-                if(dataRow[1].equals(loginUser.getName())) {
+                if (dataRow[1].equals(loginUser.getName())) {
 
-                inputStr[0] = dataRow[2];    //강좌번호
-                inputStr[1] = dataRow[3];    //강좌명
-                inputStr[2] = dataRow[4];    //학점
-                inputStr[3] = dataRow[5];    //학과
-                inputStr[4] = dataRow[6];    //교수
-                inputStr[5] = dataRow[7];    //설명
+                    inputStr[0] = dataRow[2];    //강좌번호
+                    inputStr[1] = dataRow[3];    //강좌명
+                    inputStr[2] = dataRow[4];    //학점
+                    inputStr[3] = dataRow[5];    //학과
+                    inputStr[4] = dataRow[6];    //교수
+                    inputStr[5] = dataRow[7];    //설명
 
-                model.addRow(inputStr);
+                    model.addRow(inputStr);
                 }
             }
         } catch (Exception ex) {
@@ -103,38 +128,52 @@ public class ST_StudentClass extends javax.swing.JFrame {
         }
     }
 
-    private int gradeCheck(int i) {
-
+    private boolean gradeCheck(int i) {     //학점 체크
         TableModel model = jTable1.getModel();
-        int a = Integer.parseInt(model.getValueAt(i, 2).toString());
-        int CheckNum = grade;
+        String file = "studentInfo.txt";
 
-        if (CheckNum + a > 18) {   //현재 수강 학점 + 신청하려는 수강 학점 > 18
-            JOptionPane.showMessageDialog(null, "수강 가능 학점을 초과하였습니다.");
-            return 1;
+        int storedscore;
+        int classnum = Integer.parseInt((String) model.getValueAt(i, 2));
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] userInfo = line.split(",");
+                storedscore = Integer.parseInt(userInfo[5]);
+                String storedID = userInfo[0];
+                if (storedID.equals(loginUser.getID())) {
+                    storedscore += classnum;
+                }
+                if (storedscore > 18) {   //현재 수강 학점 + 신청하려는 수강 학점 > 18
+                    return true;
+                }
+            }
+
+        } catch (IOException ex) {
+            ex.getStackTrace();
         }
-        return 0;
+        return false;
+
     }
 
-    public int DoubleCheck(int selectedline) {
+    public boolean DoubleCheck(int selectedline) {
         String file = "studentclasses.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(file))){
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             TableModel model = jTable1.getModel();
             String selectedclassnum = (model.getValueAt(selectedline, 0).toString()); //선택한 줄의 classnumber
             String line;
             while ((line = br.readLine()) != null) {
                 String[] classInfo = line.split(",");
-                String storedclassnum = classInfo[2]; // 수강 내역 파일에 있는 classnumber
-
-                if (storedclassnum.equals(selectedclassnum)) {  //두개 비교
-                    JOptionPane.showMessageDialog(null, "이미 수강한 강의 입니다.");
-                    return 2; // 이미 수강한 강의임
+                String storedID = classInfo[0];
+                String storedclassnum = classInfo[2];
+                if (storedID.equals(loginUser.getID()) && storedclassnum.equals(selectedclassnum)) {
+                    return true; // 이미 수강한 강의임
                 }
             }
+
         } catch (Exception ex) {
             ex.getStackTrace();
         }
-        return 0;
+        return false;
     }
 
     /**
@@ -258,20 +297,74 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int a = 0;  //이상 없으면 0
+
         int i = jTable1.getSelectedRow();   //몇번째 줄인지
-        a += DoubleCheck(i); // 중복 수강 체크
-        a += gradeCheck(i);   //수강 학점 체크
+        boolean tDouble, tGrade = false;
+        tDouble = DoubleCheck(i); // 중복 수강 체크
+        tGrade = gradeCheck(i);   //수강 학점 체크
 
-        if (a == 0) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
-            OutputstdInfo();            //학번,이름 저장
-            OutputstdclassInfo(i);      //수강내역 파일에 저장
-            InputstdInfo();             //화면에 보이기
+        TableModel model = jTable1.getModel();
+        String file = "studenInfo.txt";
+        int classnum = Integer.parseInt((String) model.getValueAt(i, 2));
+        if (tDouble == false && tGrade == false) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
+            SaveStdInfo();            //학번,이름 저장
+            SaveStdclassInfo(i);      //수강내역 파일에 저장
+            SaveGradeInfo();
+            PrintStdInfo();             //화면에 보이기
 
-            TableModel model = jTable1.getModel();
-            grade += Integer.parseInt(model.getValueAt(i, 2).toString());   //학점 더하기
+            String filePath = "studentInfo.txt";
+            File inputFile = new File(filePath);
+            File tempFile = new File("temp.txt");
+            BufferedReader reader;
+            BufferedWriter writer;
 
+            try {
+                reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+
+                String line;
+                boolean changed = false;
+                while ((line = reader.readLine()) != null) {
+                    String[] userInfo = line.split(",");
+                    String ID = userInfo[0];
+                    String pw = userInfo[1];
+                    String name = userInfo[2];
+                    String major = userInfo[3];
+                    String num = userInfo[4];
+                    String grade = userInfo[5];
+
+                    int storedscore = Integer.parseInt(grade);
+
+                    if (ID.equals(loginUser.getID())) {
+                        storedscore += classnum;
+                        grade = Integer.toString(storedscore);
+                        System.out.println(grade);
+                        line = ID + "," + pw + "," + name + "," + major + "," + num + "," + grade;
+                        changed = true;
+                    }
+                    writer.write(line);
+                    writer.newLine();
+                }
+                writer.close();
+                reader.close();
+                if (changed) {
+                    // 기존 파일 삭제하고 임시 파일 이름 변경
+                    inputFile.delete();
+                    tempFile.renameTo(inputFile);
+
+                } else {
+                    // 수정할 학생 정보가 없는 경우 임시 파일 삭제
+                    tempFile.delete();
+                }
+            } catch (IOException ex) {
+                ex.getStackTrace();
+            }
+        } else if (tDouble == true) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
+            JOptionPane.showMessageDialog(null, "이미 수강한 강의 입니다.");
+        } else if (tGrade == true) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
+            JOptionPane.showMessageDialog(null, "수강 가능 학점을 초과하였습니다.");
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

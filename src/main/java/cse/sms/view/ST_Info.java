@@ -166,7 +166,7 @@ public class ST_Info extends javax.swing.JFrame {
             if(idCheck) {
                 try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), "UTF-8"))) {
                     String scNum = student.getSecretNum() + "-" + student.getSecretNum2();
-                    String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum;
+                    String studentInfo = student.getStudentId() + "," + student.getSecretNum2() + "," + student.getName() + "," + student.getMajor() + "," + scNum + ",0";
                     //if (check == false) 
                     bw.write(studentInfo);
                     bw.newLine();
