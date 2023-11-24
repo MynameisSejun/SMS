@@ -142,12 +142,12 @@ public class PF_Delete extends javax.swing.JFrame {
         boolean deleted = deleteStudentInfo(deleteName, deleteResidentNum);
         if (deleted) {
             JOptionPane.showMessageDialog(null, "교수 정보가 삭제되었습니다.");
+            SM_ProfessorMenu pf = new SM_ProfessorMenu();
+            pf.setVisible(true);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "교수 정보를 찾을 수 없습니다.");
         }
-        SM_ProfessorMenu pf = new SM_ProfessorMenu();
-        pf.setVisible(true);
-        dispose();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     public boolean deleteStudentInfo(String deleteName, String deleteResidentNum) {
@@ -200,7 +200,6 @@ public class PF_Delete extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButt_Back;
