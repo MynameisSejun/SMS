@@ -161,7 +161,7 @@ public class PWChange extends javax.swing.JFrame {
 
                 // 새 비밀번호를 파일에 저장
                 try {
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename, true), "utf-8"));
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename, false), "utf-8"));
 
                     for (String line : lines) {
                         writer.write(line);
