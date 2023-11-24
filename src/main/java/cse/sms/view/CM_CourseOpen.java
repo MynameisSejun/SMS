@@ -49,13 +49,11 @@ public class CM_CourseOpen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        cMajor = new javax.swing.JTextField();
         cGrade = new javax.swing.JTextField();
-        cInfor = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        cpName = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -95,16 +93,16 @@ public class CM_CourseOpen extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel4.setText("학점");
+        jLabel4.setText("학과");
 
-        cInfor.addActionListener(new java.awt.event.ActionListener() {
+        cGrade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cInforActionPerformed(evt);
+                cGradeActionPerformed(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel5.setText("설명");
+        jLabel5.setText("학점");
 
         jButton1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jButton1.setText("등록");
@@ -120,9 +118,6 @@ public class CM_CourseOpen extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel6.setText("담당교수");
 
         jLabel7.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
         jLabel7.setText("강좌 등록");
@@ -141,56 +136,47 @@ public class CM_CourseOpen extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4))
                         .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cInfor)
-                                    .addComponent(cpName)
-                                    .addComponent(cName)
-                                    .addComponent(cNum)
-                                    .addComponent(cGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(43, 43, 43)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel7)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cGrade)
+                            .addComponent(cName)
+                            .addComponent(cNum)
+                            .addComponent(cMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(59, 59, 59))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(jLabel7)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap(47, Short.MAX_VALUE)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cpName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cInfor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cGrade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -198,17 +184,13 @@ public class CM_CourseOpen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cInforActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cInforActionPerformed
+    private void cGradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cGradeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cInforActionPerformed
+    }//GEN-LAST:event_cGradeActionPerformed
 
     private void cNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cNumActionPerformed
-
-    private void cNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cNameActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // 뒤로 가기
@@ -222,13 +204,13 @@ public class CM_CourseOpen extends javax.swing.JFrame {
 
         String filePath = "classes.txt";
         
-    ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), cpName.getText(), cGrade.getText(), cInfor.getText());
+    ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), cMajor.getText(), cGrade.getText());
     CMCheck ck = new CMCheck();
     
     boolean idCheck = true;
     boolean emCheck = true;
     
-    emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), cpName.getText(),   cGrade.getText(), cInfor.getText());
+    emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(),  cMajor.getText(), cGrade.getText());
 
    
     idCheck = ck.equalCehck2(filePath, cNum.getText()); // 문제
@@ -237,7 +219,7 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     if (emCheck) {
         if (idCheck) {
             try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), "UTF-8"))) {
-                String classInfo = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getPName() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
+                String classInfo = classCourse.getNum() + "," + classCourse.getName() + ","  + classCourse.getMajor() + "," + classCourse.getGrade();
                 bw.write(classInfo);
                 bw.newLine();
                 JOptionPane.showMessageDialog(null, "저장되었습니다!");
@@ -255,12 +237,15 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cNameActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cGrade;
-    private javax.swing.JTextField cInfor;
+    private javax.swing.JTextField cMajor;
     private javax.swing.JTextField cName;
     private javax.swing.JTextField cNum;
-    private javax.swing.JTextField cpName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -268,7 +253,6 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
