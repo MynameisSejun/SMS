@@ -41,6 +41,7 @@ public class CM_ClassOpen extends javax.swing.JFrame {
         tableModel.addColumn("강좌번호");
         tableModel.addColumn("강좌명");
         tableModel.addColumn("담당학과");
+
         tableModel.addColumn("학점");
         jTable2.setModel(tableModel);
 
@@ -91,6 +92,7 @@ public class CM_ClassOpen extends javax.swing.JFrame {
         cInfor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
 
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
@@ -112,10 +114,10 @@ public class CM_ClassOpen extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "강좌번호", "강좌명", "담당 학과", "학점"
@@ -148,6 +150,7 @@ public class CM_ClassOpen extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel6.setText("강의계획내용");
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,9 +161,11 @@ public class CM_ClassOpen extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
+
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -299,6 +304,7 @@ if (emCheck) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cInfor;
+
     private javax.swing.JTextField cName;
     private javax.swing.JTextField cNum;
     private javax.swing.JButton classInfo;
@@ -307,7 +313,9 @@ if (emCheck) {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+
     private javax.swing.JLabel jLabel6;
+
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField mPeople;

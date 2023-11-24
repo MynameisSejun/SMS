@@ -81,8 +81,8 @@
                 <Column editable="false" title="&#xbc88;&#xd638;" type="java.lang.Object"/>
                 <Column editable="false" title="&#xc774;&#xb984;" type="java.lang.Object"/>
                 <Column editable="false" title="&#xd559;&#xc810;" type="java.lang.Object"/>
-                <Column editable="false" title="&#xd559;&#xacfc;" type="java.lang.Object"/>
                 <Column editable="false" title="&#xad50;&#xc218;" type="java.lang.Object"/>
+                <Column editable="false" title="&#xcd5c;&#xb300;/&#xcd24;&#xc18c;&#xc778;&#xc6d0;" type="java.lang.Object"/>
                 <Column editable="false" title="&#xc124;&#xba85;" type="java.lang.Object"/>
               </Table>
             </Property>
@@ -152,14 +152,14 @@
                 <Column editable="false" title="&#xbc88;&#xd638;" type="java.lang.Object"/>
                 <Column editable="false" title="&#xc774;&#xb984;" type="java.lang.Object"/>
                 <Column editable="false" title="&#xd559;&#xc810;" type="java.lang.Object"/>
-                <Column editable="false" title="&#xd559;&#xacfc;" type="java.lang.Object"/>
                 <Column editable="false" title="&#xad50;&#xc218;" type="java.lang.Object"/>
+                <Column editable="false" title="&#xcd5c;&#xb300;/&#xcd5c;&#xc18c;&#xc778;&#xc6d0;" type="java.lang.Object"/>
                 <Column editable="false" title="&#xc124;&#xba85;" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>

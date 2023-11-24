@@ -24,7 +24,7 @@ public class PF_Info extends javax.swing.JFrame {
      */
     public PF_Info() {
         initComponents();
-        setTitle("교수 - 정보 수정ㄴ " + loginUser.getID() + " " + UserData.getName());
+        setTitle("교수 - 정보 수정 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 

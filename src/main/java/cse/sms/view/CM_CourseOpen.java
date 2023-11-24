@@ -246,6 +246,7 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     private javax.swing.JTextField cMajor;
     private javax.swing.JTextField cName;
     private javax.swing.JTextField cNum;
+    private javax.swing.JTextField cpName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

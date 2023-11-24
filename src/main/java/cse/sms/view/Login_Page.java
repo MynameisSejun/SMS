@@ -173,15 +173,15 @@ public class Login_Page extends javax.swing.JFrame {
         String ID = ID_INPUT.getText(); // 입력한 ID
         String PW = new String(PW_INPUT.getPassword()); // 입력한 PW
         Check checknum = new Check();
-        char first_munja = ID_INPUT.getText().charAt(0); // 첫 번째 글자 판별 후 페이지 이동
+        
         int num;
         
         UserData loginUser = UserData.getInstance();
         loginUser.setID(ID);
         loginUser.setPW(PW);
         
-        System.out.println("시험");
-        
+        if(!ID_INPUT.getText().trim().isEmpty()) {
+            char first_munja = ID_INPUT.getText().charAt(0);
         switch (first_munja) {
             case 'S':
                 String file = "studentInfo.txt";
@@ -259,8 +259,16 @@ public class Login_Page extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "아이디가 일치하지 않습니다."); // 로그인 실패 -> 아이디 불일치
                     break;
                 }
+                  
+            default:
+                System.out.println(first_munja);
+                JOptionPane.showMessageDialog(null, "아이디가 일치하지 않습니다."); // 로그인 실패 -> 비밀번호 불일치
+                break;
         }  
-        
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "아이디를 입력하세요."); // 로그인 실패 -> 비밀번호 불일치
+        }
     }//GEN-LAST:event_LOGIN_BUTTActionPerformed
 
     private void PW_INPUTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PW_INPUTActionPerformed
