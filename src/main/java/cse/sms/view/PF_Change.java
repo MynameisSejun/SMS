@@ -202,11 +202,12 @@ public class PF_Change extends javax.swing.JFrame {
     private void jButton4ButtonChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ButtonChange
         String existingpNum = pNum.getText(); // 기존 학번
         String existingName = pName.getText(); // 기존 이름
+        String existingMajor = pMajor.getText(); // 기존 학과
         String newNumText = newNum.getText(); // 변경할 학번
         String newNameText = newName.getText(); // 변경할 이름
         String newMajorText = newMajor.getText(); // 변경할 학과
 
-        boolean changed = changeProfessorInfo(existingpNum, existingName, newNumText, newNameText, newMajorText);
+        boolean changed = changeProfessorInfo(existingpNum, existingName, existingMajor, newNumText, newNameText, newMajorText);
         if (changed) {
             JOptionPane.showMessageDialog(null, "교수 정보가 수정되었습니다.");
             SM_ProfessorMenu pf = new SM_ProfessorMenu();
@@ -215,9 +216,6 @@ public class PF_Change extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "교수 정보를 찾을 수 없습니다.");
         }
-        SM_ProfessorMenu pf = new SM_ProfessorMenu();
-        pf.setVisible(true);
-        dispose();
     }//GEN-LAST:event_jButton4ButtonChange
 
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
@@ -226,7 +224,7 @@ public class PF_Change extends javax.swing.JFrame {
         pf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
-    public boolean changeProfessorInfo(String existingNum, String existingName, String newNum, String newName, String newMajor) {
+    public boolean changeProfessorInfo(String existingNum, String existingName,  String existingMajor, String newNum, String newName, String newMajor) {
         String filePath = "professorInfo.txt";
         File inputFile = new File(filePath);
         File tempFile = new File("temp.txt");
@@ -246,7 +244,7 @@ public class PF_Change extends javax.swing.JFrame {
                 String storedName = userInfo[2].trim();
                 String storedMajor = userInfo[3].trim();
 
-                if (storedNum.equals(existingNum) && storedName.equals(existingName)) {
+                if (storedNum.equals(existingNum) && storedName.equals(existingName) && storedMajor.equals(existingMajor)) {
                     // 기존 정보와 일치하는 교수 정보를 찾은 경우
                     line = newNum + "," + userInfo[1] + "," + newName + "," + newMajor + "," + userInfo[4];
                     changed = true; // 수정 플래그를 true로 설정하여 수정 여부를 확인
@@ -278,37 +276,7 @@ public class PF_Change extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PF_Change.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PF_Change.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PF_Change.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PF_Change.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PF_Change().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButt_Back;

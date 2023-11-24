@@ -35,15 +35,10 @@
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="pNum" min="-2" pref="72" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="sjNum" min="-2" pref="72" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="pNum" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="sjNum" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
