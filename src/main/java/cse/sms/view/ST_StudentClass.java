@@ -4,17 +4,16 @@
  */
 package cse.sms.view;
 
+import cse.sms.NewJFrame;
 import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import java.util.Arrays;
 
 /**
  *
@@ -38,26 +37,15 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
     private void PrintclassInfo() {  //강의 가능 수업 목록
 
-        File file = new File("classes.txt");
+        File file = new File("classopen.txt");  //강의파일
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             String temp;
             while ((temp = br.readLine()) != null) {
                 String[] dataRow = temp.split(",");
+                //번호 이름 학점 교수 인원수 설명
                 model.addRow(dataRow);
             }
-
-        } catch (Exception ex) {
-            ex.getStackTrace();
-        }
-    }
-
-    private void SaveStdInfo() {    //학번,이름 저장
-        File file = new File("studentclasses.txt");
-        try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "utf-8"))) {
-            String stdnum = loginUser.getID();
-            String name = loginUser.getName();
-            bw.write(stdnum + "," + name + ",");
 
         } catch (Exception ex) {
             ex.getStackTrace();
@@ -71,14 +59,8 @@ public class ST_StudentClass extends javax.swing.JFrame {
             String temp;
             while ((temp = br.readLine()) != null) {
                 String[] dataRow = temp.split(",");
-
-                System.out.println(Arrays.toString(dataRow) + "======");
-
                 if (dataRow[0].equals(loginUser.getID())) {
-                    dataRow[5] = loginUser.getGrade(); // 성적 업데이트
-
-                    System.out.println("성적 업데이트 : " + dataRow[5]);
-
+                    dataRow[5] = loginUser.getGrade();
                     temp = String.join(",", dataRow);
                 }
             }
@@ -87,12 +69,36 @@ public class ST_StudentClass extends javax.swing.JFrame {
         }
     }
 
-    private void SaveStdclassInfo(int i) {    //수강 내역 저장
+    private void SaveCountstdInfo(int i) {    //현재 수강 인원 저장
 
-        File file = new File("studentclasses.txt");
+        File file2 = new File("classopen.txt");   // 
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file2), "UTF-8"))) {
+            String temp;
+            while ((temp = br.readLine()) != null) {
+                String[] dataRow = temp.split(",");
+                if (dataRow[0].equals(jTable1.getValueAt(i, 0))) {  //선택한 강좌번호 = classopen 강좌번호
+                    int currentstd = Integer.parseInt(dataRow[6]);
+                    dataRow[6] = Integer.toString(currentstd++);
+                    System.out.println(dataRow[6] +"!!!!!!!!!");
+                }
+            }
+        } catch (Exception ex) {
+            ex.getStackTrace();
+        }
+    }
+
+    private void SaveStdclassInfo(int i) {    //학번, 이름, 수강 내역 저장
+
+        File file = new File("classopen.txt");
         try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "utf-8"))) {
+            String stdnum = loginUser.getID();
+            String name = loginUser.getName();
+            bw.write(stdnum + "," + name + ",");
+
             for (int j = 0; j < jTable1.getColumnCount(); j++) {
-                bw.write(jTable1.getValueAt(i, j).toString() + ",");
+                if (j != 4) {
+                    bw.write(jTable1.getValueAt(i, j).toString() + ",");
+                }
             }
             bw.newLine();
             bw.close();
@@ -102,30 +108,48 @@ public class ST_StudentClass extends javax.swing.JFrame {
     }
 
     private void PrintStdInfo() {    //학생 수강 내역 띄우기
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        boolean tID = false;
+        String inputStr[] = new String[6];
+
         String file = "studentclasses.txt";
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
-            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
             model.setNumRows(0);    //Row 0해서 리셋
 
             String temp;
             while ((temp = br.readLine()) != null) {
-                String[] dataRow = temp.split(",");
-                String inputStr[] = new String[6];
-                if (dataRow[1].equals(loginUser.getName())) {
-
+                String dataRow[] = temp.split(",");
+                if (dataRow[0].equals(loginUser.getID())) { //id동일
+                    tID = true;
                     inputStr[0] = dataRow[2];    //강좌번호
                     inputStr[1] = dataRow[3];    //강좌명
                     inputStr[2] = dataRow[4];    //학점
-                    inputStr[3] = dataRow[5];    //학과
-                    inputStr[4] = dataRow[6];    //교수
-                    inputStr[5] = dataRow[7];    //설명
+                    inputStr[3] = dataRow[5];    //교수
+                    inputStr[4] = "";
+                    inputStr[5] = dataRow[6];    //설명
 
-                    model.addRow(inputStr);
                 }
             }
         } catch (Exception ex) {
             ex.getStackTrace();
         }
+
+        if (tID) {
+            String file2 = "classopen.txt";
+            try (BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2), "UTF-8"))) {
+                String temp2;
+                while ((temp2 = br2.readLine()) != null) {
+                    String[] dataRow2 = temp2.split(",");
+                    if (dataRow2[0].equals(inputStr[0])) {
+                        inputStr[4] = dataRow2[4];
+                        model.addRow(inputStr);
+                    }
+                }
+            } catch (Exception ex) {
+                ex.getStackTrace();
+            }
+        }
+
     }
 
     private boolean gradeCheck(int i) {     //학점 체크
@@ -176,6 +200,31 @@ public class ST_StudentClass extends javax.swing.JFrame {
         return false;
     }
 
+    private boolean maxPersonCheck(int i) {     //최대인원 수 체크
+        TableModel model = jTable1.getModel();
+        int max =0,crrcount = 0;
+        String currentstd;    //선택한 강의의 수강인원
+        String classnum = (String) model.getValueAt(i, 0);  //수강번호
+        String file = "classopen.txt";      //강좌번호0, 이름1, 학점2, 교수이름3, 인원수4, 설명5, 현재수강인원 6
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] dataRow = line.split(",");
+                String[] maxmin2 = dataRow[4].split("/");
+                max = Integer.parseInt(maxmin2[0]);
+                crrcount = Integer.parseInt(maxmin2[6]);
+            }
+            if(crrcount > max){     //현재 수강 인원>최대보다 많으면
+                return true;
+                
+            }
+
+        } catch (IOException ex) {
+            ex.getStackTrace();
+        }
+        return false;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -199,7 +248,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
             },
             new String [] {
-                "번호", "이름", "학점", "학과", "교수", "설명"
+                "번호", "이름", "학점", "교수", "최대/촤소인원", "설명"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -227,7 +276,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
             },
             new String [] {
-                "번호", "이름", "학점", "학과", "교수", "설명"
+                "번호", "이름", "학점", "교수", "최대/최소인원", "설명"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -242,6 +291,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
         jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
             jTable2.getColumnModel().getColumn(2).setResizable(false);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
@@ -297,19 +347,21 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
         int i = jTable1.getSelectedRow();   //몇번째 줄인지
-        boolean tDouble, tGrade = false;
+        TableModel model = jTable1.getModel();
+
+        boolean tDouble, tGrade, tMaxmin = false;
         tDouble = DoubleCheck(i); // 중복 수강 체크
         tGrade = gradeCheck(i);   //수강 학점 체크
+        tMaxmin = maxPersonCheck(i);    //최대 최소 인원 체크
 
-        TableModel model = jTable1.getModel();
         String file = "studenInfo.txt";
         int classnum = Integer.parseInt((String) model.getValueAt(i, 2));
-        if (tDouble == false && tGrade == false) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
-            SaveStdInfo();            //학번,이름 저장
+
+        if (tDouble == false && tGrade == false && tMaxmin == false) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
             SaveStdclassInfo(i);      //수강내역 파일에 저장
-            SaveGradeInfo();
+            SaveGradeInfo();        //학생정보에 학점 저장
+            SaveCountstdInfo(i);         //수강 인원 +1 해서 classopen에 저장
             PrintStdInfo();             //화면에 보이기
 
             String filePath = "studentInfo.txt";
@@ -382,4 +434,5 @@ public class ST_StudentClass extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
 }
