@@ -139,6 +139,7 @@ public class PWChange extends javax.swing.JFrame {
             String confirmNewPassword = confirmNewPasswordTextField.getText(); // 새 비번 확인
             
             // 현재 비번, 새 비번, 새 비번 확인이 모두 일치하는지 확인
+        if (!(currentPassword.isEmpty() || newPassword.isEmpty() || confirmNewPassword.isEmpty())) {
             if (currentPassword.equals(loginUser.getPW()) && newPassword.equals(confirmNewPassword)) {
                 // BufferedReader를 사용하여 파일을 읽어 아이디를 비교하여 비밀번호를 변경
                 List<String> lines = new ArrayList<>();
@@ -172,9 +173,34 @@ public class PWChange extends javax.swing.JFrame {
                 }
                 
                 JOptionPane.showMessageDialog(this, "비밀번호가 성공적으로 변경되었습니다.");
+                switch (firstChar) {
+                    case 'S':
+                        dispose();
+                        ST_FirstPage st = new ST_FirstPage();
+                        st.setVisible(true);
+                        break;
+                    case 'P':
+                        dispose();
+                        PF_FirstPage pf = new PF_FirstPage();
+                        pf.setVisible(true);
+                        break;
+                    case 'G':
+                        dispose();
+                        CM_FirstPage cm = new CM_FirstPage();
+                        cm.setVisible(true);
+                        break;
+                    case 'H':
+                        dispose();
+                        SM_FirstPage sm = new SM_FirstPage();
+                        sm.setVisible(true);
+                        break;
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "비밀번호 변경에 실패했습니다. 입력한 정보를 다시 확인해주세요.");
             }
+        }else {
+            JOptionPane.showMessageDialog(this, "빈칸이 없도록 입력해주세요.");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

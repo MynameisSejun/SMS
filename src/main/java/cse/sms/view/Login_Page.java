@@ -47,7 +47,6 @@ public class Login_Page extends javax.swing.JFrame {
         ID_INPUT = new javax.swing.JTextField();
         PW_INPUT = new javax.swing.JPasswordField();
         SHOW_PW = new javax.swing.JCheckBox();
-        PW_CHANGE = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -101,13 +100,6 @@ public class Login_Page extends javax.swing.JFrame {
             }
         });
 
-        PW_CHANGE.setText("비밀번호 변경");
-        PW_CHANGE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PW_CHANGEActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,10 +123,7 @@ public class Login_Page extends javax.swing.JFrame {
                         .addComponent(LOGIN_BUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(168, 168, 168)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(PW_CHANGE)))
+                        .addComponent(jLabel1)))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -154,9 +143,7 @@ public class Login_Page extends javax.swing.JFrame {
                 .addComponent(SHOW_PW)
                 .addGap(12, 12, 12)
                 .addComponent(LOGIN_BUTT, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PW_CHANGE)
-                .addContainerGap())
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -284,10 +271,6 @@ public class Login_Page extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_SHOW_PWActionPerformed
 
-    private void PW_CHANGEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PW_CHANGEActionPerformed
-        
-    }//GEN-LAST:event_PW_CHANGEActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -298,7 +281,6 @@ public class Login_Page extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID_INPUT;
     private javax.swing.JButton LOGIN_BUTT;
-    private javax.swing.JButton PW_CHANGE;
     private javax.swing.JPasswordField PW_INPUT;
     private javax.swing.JCheckBox SHOW_PW;
     private javax.swing.JDesktopPane jDesktopPane1;
