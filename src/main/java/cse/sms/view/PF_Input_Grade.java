@@ -87,7 +87,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 
-                if (data.length >= 2 && data[1].equals(studentNumber)) {
+                if (data.length >= 2 && data[0].equals(studentNumber)) {
                     data[8] = newGrade; // 성적 업데이트
                     line = String.join(",", data);
                 }
@@ -171,7 +171,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "이름", "학번", "학과", "성적"
+                "학번", "이름", "학과", "성적"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -239,7 +239,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
         int selectedRow = jTable2.getSelectedRow();
         if (selectedRow != -1) {
             String grade = (String) jComboBox1.getSelectedItem(); // 선택한 성적을 가져옴
-            String studentNumber = (String) jTable2.getValueAt(selectedRow, 1); // 선택한 학생의 이름을 가져옴
+            String studentNumber = (String) jTable2.getValueAt(selectedRow, 0); // 선택한 학생의 ID을 가져옴
             
             try {
                 updateGrade(studentNumber, grade);
