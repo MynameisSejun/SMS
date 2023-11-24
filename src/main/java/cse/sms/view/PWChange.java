@@ -16,9 +16,9 @@ import java.io.BufferedWriter;
  * @author 915
  */
 public class PWChange extends javax.swing.JFrame {
-    
+
     UserData loginUser = UserData.getInstance();
-    
+
     /**
      * Creates new form PWChange
      */
@@ -116,10 +116,10 @@ public class PWChange extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // 누구인지 판별해서 읽을 파일 정하기
         char firstChar = loginUser.getID().charAt(0);
-        
+
         String filename = null;
-        
-        switch(firstChar) {
+
+        switch (firstChar) {
             case 'S':
                 filename = "studentInfo.txt";
                 break;
@@ -133,22 +133,23 @@ public class PWChange extends javax.swing.JFrame {
                 filename = "schoolmanagerInfo.txt";
                 break;
         }
-       
-            String currentPassword = currentPasswordTextField.getText(); //현재 비번
-            String newPassword = newPasswordTextField.getText(); // 새 비번
-            String confirmNewPassword = confirmNewPasswordTextField.getText(); // 새 비번 확인
-            
-            // 현재 비번, 새 비번, 새 비번 확인이 모두 일치하는지 확인
+
+        String currentPassword = currentPasswordTextField.getText(); //현재 비번
+        String newPassword = newPasswordTextField.getText(); // 새 비번
+        String confirmNewPassword = confirmNewPasswordTextField.getText(); // 새 비번 확인
+
+        // 현재 비번, 새 비번, 새 비번 확인이 모두 일치하는지 확인
+        if (!(currentPassword.isEmpty() || newPassword.isEmpty() || confirmNewPassword.isEmpty())) {
             if (currentPassword.equals(loginUser.getPW()) && newPassword.equals(confirmNewPassword)) {
                 // BufferedReader를 사용하여 파일을 읽어 아이디를 비교하여 비밀번호를 변경
                 List<String> lines = new ArrayList<>();
-                try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8"))){
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "UTF-8"))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         String[] data = line.split(",");
                         String savedID = data[0];
                         String savedPassword = data[1];
-                        
+
                         if (loginUser.getID().equals(savedID)) {
                             data[1] = newPassword; // 새로운 비밀번호로 변경
                         }
@@ -157,11 +158,11 @@ public class PWChange extends javax.swing.JFrame {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                
+
                 // 새 비밀번호를 파일에 저장
-                
                 try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename, true), "utf-8"));
+
                     for (String line : lines) {
                         writer.write(line);
                         writer.newLine();
@@ -170,16 +171,43 @@ public class PWChange extends javax.swing.JFrame {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                
+
                 JOptionPane.showMessageDialog(this, "비밀번호가 성공적으로 변경되었습니다.");
+
+                switch (firstChar) {
+                    case 'S':
+                        dispose();
+                        ST_FirstPage st = new ST_FirstPage();
+                        st.setVisible(true);
+                        break;
+                    case 'P':
+                        dispose();
+                        PF_FirstPage pf = new PF_FirstPage();
+                        pf.setVisible(true);
+                        break;
+                    case 'G':
+                        dispose();
+                        CM_FirstPage cm = new CM_FirstPage();
+                        cm.setVisible(true);
+                        break;
+                    case 'H':
+                        dispose();
+                        SM_FirstPage sm = new SM_FirstPage();
+                        sm.setVisible(true);
+                        break;
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "비밀번호 변경에 실패했습니다. 입력한 정보를 다시 확인해주세요.");
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "빈칸이 없도록 입력해주세요.");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         char firstChar = loginUser.getID().charAt(0);
-        switch(firstChar) {
+        switch (firstChar) {
             case 'S':
                 dispose();
                 ST_FirstPage st = new ST_FirstPage();
@@ -187,7 +215,7 @@ public class PWChange extends javax.swing.JFrame {
                 break;
             case 'P':
                 dispose();
-                PF_FirstPage pf= new PF_FirstPage();
+                PF_FirstPage pf = new PF_FirstPage();
                 pf.setVisible(true);
                 break;
             case 'G':

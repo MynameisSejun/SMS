@@ -33,12 +33,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jButton2" pref="100" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButton1" max="32767" attributes="0"/>
-                      <Component id="confirmNewPasswordTextField" pref="100" max="32767" attributes="0"/>
-                      <Component id="newPasswordTextField" max="32767" attributes="0"/>
-                      <Component id="currentPasswordTextField" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jButton1" max="32767" attributes="0"/>
+                  <Component id="confirmNewPasswordTextField" pref="100" max="32767" attributes="0"/>
+                  <Component id="newPasswordTextField" max="32767" attributes="0"/>
+                  <Component id="currentPasswordTextField" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
           </Group>
