@@ -26,7 +26,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
      */
     public PF_FirstPage() {
         initComponents();
-        setTitle("교수 " + loginUser.getID() + " " + UserData.getName());
+        setTitle("교수 " + loginUser.getID() + " " + loginUser.getName());
         setLocationRelativeTo(null);
         fillTable();
     }
@@ -37,7 +37,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
             String line;
             String[] data;
-
+            
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             // model.setRowCount(0);  // 테이블 초기화
 
