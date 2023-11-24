@@ -24,7 +24,7 @@ public class PF_Info extends javax.swing.JFrame {
      */
     public PF_Info() {
         initComponents();
-        setTitle("교수 - 정보 수정ㄴ " + loginUser.getID() + " " + UserData.getName());
+        setTitle("교수 - 정보 수정 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -181,8 +181,7 @@ public class PF_Info extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
-        // TODO add your handling code here:
-        PF_FirstPage pf = new PF_FirstPage();
+        SM_ProfessorMenu pf = new SM_ProfessorMenu();
         pf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed

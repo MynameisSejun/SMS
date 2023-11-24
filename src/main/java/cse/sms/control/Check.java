@@ -49,7 +49,7 @@ public class Check {
     public int loginCheck(String filePath, String ID, String PW) {
         boolean check = false;
         boolean passwordcheck = false;
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "utf-8"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] userInfo = line.split(","); // txt파일에 저장되어있는 아이디와 비밀번호를 나눠서 저장.
