@@ -414,6 +414,8 @@ private void PrintStdInfo() {    //학생 수강 내역 띄우기
             JOptionPane.showMessageDialog(null, "이미 수강한 강의 입니다.");
         } else if (tGrade == true) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
             JOptionPane.showMessageDialog(null, "수강 가능 학점을 초과하였습니다.");
+        } else if (tMaxmin == true) {   //문제 없으면 수강내역 파일에 값저장, 아래에 내역 띄우기
+            JOptionPane.showMessageDialog(null, "수강 가능 인원을 초과하였습니다.");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
