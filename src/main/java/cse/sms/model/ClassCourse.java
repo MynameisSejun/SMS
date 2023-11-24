@@ -14,19 +14,22 @@ public class ClassCourse {
      */
   private String num;
     private String name;
+    private String pname;
     private String grade;
     private String infor;
 
-    public ClassCourse(String num, String name, String grade, String infor) {
+    public ClassCourse(String num, String name, String pname, String grade, String infor) {
         this.num = num;
         this.name = name;
+        this.pname = pname;
         this.grade = grade;
         this.infor = infor;
     }
 
-    public ClassCourse(String num, String grade, String infor) {
+    public ClassCourse(String num, String name, String pname, String infor) {
         this.num = num;
-        this.grade = grade;
+        this.name = name;
+        this.pname = pname;
         this.infor = infor;
     }
     
@@ -38,6 +41,10 @@ public class ClassCourse {
 
     public String getName() {
         return name;
+    }
+    
+    public String getPName() {
+        return pname;
     }
 
     public String getGrade() {

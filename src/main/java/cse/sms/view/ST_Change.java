@@ -20,13 +20,15 @@ import javax.swing.JOptionPane;
  * @author suk22
  */
 public class ST_Change extends javax.swing.JFrame {
+
     UserData loginUser = UserData.getInstance();
+
     /**
      * Creates new form StudentChange
      */
     public ST_Change() {
         initComponents();
-        setTitle("학생 - 학생수정 "+ loginUser.getID());
+        setTitle("학생 - 학생수정 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -50,12 +52,12 @@ public class ST_Change extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         newNum = new javax.swing.JTextField();
         newName = new javax.swing.JTextField();
-        newMajor = new javax.swing.JTextField();
         sNum = new javax.swing.JTextField();
         sName = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
-        sMajor = new javax.swing.JTextField();
         jButt_Back = new javax.swing.JButton();
+        sMajor = new java.awt.Choice();
+        newMajor = new java.awt.Choice();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,32 +121,32 @@ public class ST_Change extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(sName, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(sMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(sNum, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(60, 60, 60)
+                                        .addComponent(sNum, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(sMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(sName, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(newMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(newName, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(newNum, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(newNum, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(96, Short.MAX_VALUE))
+                                        .addComponent(newMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addGap(90, 90, 90))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButt_Back)
@@ -173,12 +175,16 @@ public class ST_Change extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(newName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel9)
-                    .addComponent(newMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel9))
+                        .addComponent(sMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(newMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
@@ -186,19 +192,34 @@ public class ST_Change extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
+        sMajor.add("전산학과");
+        sMajor.add("전자공학과");
+        sMajor.add("화학공학과");
+        sMajor.add("기계공학과");
+        sMajor.add("항공우주공학과");
+        newMajor.add("전산학과");
+        newMajor.add("전자공학과");
+        newMajor.add("화학공학과");
+        newMajor.add("기계공학과");
+        newMajor.add("항공우주공학과");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonChange(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonChange
         String existingNum = sNum.getText(); // 기존 학번
         String existingName = sName.getText(); // 기존 이름
+        String existingMajor = sMajor.getSelectedItem(); // 기존 학과
         String newNumText = newNum.getText(); // 변경할 학번
         String newNameText = newName.getText(); // 변경할 이름
-        String newMajorText = newMajor.getText(); // 변경할 학과
+        String newMajorText = newMajor.getSelectedItem(); // 변경할 학과
 
-        boolean changed = changeStudentInfo(existingNum, existingName, newNumText, newNameText, newMajorText);
+        boolean changed = changeStudentInfo(existingNum, existingName, existingMajor, newNumText, newNameText, newMajorText);
         if (changed) {
             JOptionPane.showMessageDialog(null, "학생 정보가 수정되었습니다.");
+            SM_StudentMenu pf = new SM_StudentMenu();
+            pf.setVisible(true);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "학생 정보를 찾을 수 없습니다.");
         }
@@ -210,9 +231,9 @@ public class ST_Change extends javax.swing.JFrame {
         pf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
-    
-public boolean changeStudentInfo(String existingNum, String existingName, String newNum, String newName, String newMajor) {
-        String filePath = "studentInfo.txt"; 
+
+    public boolean changeStudentInfo(String existingNum, String existingName, String existingMajor, String newNum, String newName, String newMajor) {
+        String filePath = "studentInfo.txt";
         File inputFile = new File(filePath);
         File tempFile = new File("temp.txt");
         BufferedReader reader;
@@ -231,7 +252,7 @@ public boolean changeStudentInfo(String existingNum, String existingName, String
                 String storedName = userInfo[2].trim();
                 String storedMajor = userInfo[3].trim();
 
-                if (storedNum.equals(existingNum) && storedName.equals(existingName)) {
+                if (storedNum.equals(existingNum) && storedName.equals(existingName) && storedMajor.equals(existingMajor)) {
                     // 기존 정보와 일치하는 학생 정보를 찾은 경우
                     line = newNum + "," + userInfo[1] + "," + newName + "," + newMajor + "," + userInfo[4];
                     changed = true; // 수정 플래그를 true로 설정하여 수정 여부를 확인
@@ -259,7 +280,7 @@ public boolean changeStudentInfo(String existingNum, String existingName, String
 
         return false;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -276,10 +297,10 @@ public boolean changeStudentInfo(String existingNum, String existingName, String
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField newMajor;
+    private java.awt.Choice newMajor;
     private javax.swing.JTextField newName;
     private javax.swing.JTextField newNum;
-    private javax.swing.JTextField sMajor;
+    private java.awt.Choice sMajor;
     private javax.swing.JTextField sName;
     private javax.swing.JTextField sNum;
     // End of variables declaration//GEN-END:variables

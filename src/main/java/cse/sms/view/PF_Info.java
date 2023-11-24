@@ -182,7 +182,7 @@ public class PF_Info extends javax.swing.JFrame {
 
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
         // TODO add your handling code here:
-        PF_FirstPage pf = new PF_FirstPage();
+        SM_ProfessorMenu pf = new SM_ProfessorMenu();
         pf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
