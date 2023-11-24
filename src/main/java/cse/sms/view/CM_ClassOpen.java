@@ -212,15 +212,9 @@ public class CM_ClassOpen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void classInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classInfoActionPerformed
-<<<<<<< HEAD
-    String filePath = "classopen.txt";  //강좌
-    String classFilePath = "classes.txt";   //강의
-    ClassCourse classCourse = new ClassCourse(cNum.getText(), pName.getText(), mPeople.getText());
-=======
     String filePath = "classopen.txt";
     String classFilePath = "classes.txt";
     ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), pName.getText(), mPeople.getText());
->>>>>>> 31e0dd49409fdda86293fe6e5d9fb2e18f839906
     CMCheck ck = new CMCheck();
 
     boolean emCheck = ck.emptyCheck2(cNum.getText(),  cName.getText(), pName.getText(), mPeople.getText());
