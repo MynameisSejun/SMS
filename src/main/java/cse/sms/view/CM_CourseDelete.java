@@ -22,7 +22,9 @@ import javax.swing.JOptionPane;
  * @author 원채연
  */
 public class CM_CourseDelete extends javax.swing.JFrame {
+
     UserData loginUser = UserData.getInstance();
+
     /**
      * Creates new form CM_CouseDelete
      */
@@ -124,62 +126,66 @@ public class CM_CourseDelete extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-                // TODO add your handling code here:
-     String deleteNum = cNum.getText(); // 사용자가 입력한 강좌 번호
-    String deleteResidentName = cName.getText(); // 사용자가 입력한 강좌명
+        // TODO add your handling code here:
+        String deleteNum = cNum.getText(); // 사용자가 입력한 강좌 번호
+        String deleteResidentName = cName.getText(); // 사용자가 입력한 강좌명
 
-    boolean deleted = deletecourseInfo(deleteNum, deleteResidentName);
-    if (deleted) {
-        JOptionPane.showMessageDialog(null, "강좌 정보가 삭제되었습니다.");
-    } else {
-        JOptionPane.showMessageDialog(null, "강좌 정보를 찾을 수 없습니다.");
+        boolean deleted = deletecourseInfo(deleteNum, deleteResidentName);
+        if (deleted) {
+            JOptionPane.showMessageDialog(null, "강좌 정보가 삭제되었습니다.");
+            dispose();
+            CM_FirstPage sf = new CM_FirstPage();
+            sf.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "강좌 정보를 찾을 수 없습니다.");
+        }
     }
-    }                                             
- public boolean deletecourseInfo(String deleteNum, String deleteResidentName) {
-    String filePath = "classes.txt";
-    File inputFile = new File(filePath);
-    File tempFile = new File("temp.txt");
-    BufferedReader reader;
-    BufferedWriter writer;
 
-    try {
-        reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
-        writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+    public boolean deletecourseInfo(String deleteNum, String deleteResidentName) {
+        String filePath = "classes.txt";
+        File inputFile = new File(filePath);
+        File tempFile = new File("temp.txt");
+        BufferedReader reader;
+        BufferedWriter writer;
 
-        String line;
-        boolean deleted = false; // 삭제 여부 확인을 위한 플래그
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
 
-        while ((line = reader.readLine()) != null) {
-            String[] userInfo = line.split(",");
-            String storedName = userInfo[0].trim();
-            String storedResidentNum = userInfo[1].trim();
+            String line;
+            boolean deleted = false; // 삭제 여부 확인을 위한 플래그
 
-            if (storedName.equals(deleteNum) && storedResidentNum.equals(deleteResidentName)) {
-                deleted = true; // 삭제 플래그를 true로 설정하여 삭제 여부를 확인
-                continue; // 삭제할 강좌 정보는 쓰지 않고 건너뜀
+            while ((line = reader.readLine()) != null) {
+                String[] userInfo = line.split(",");
+                String storedName = userInfo[0].trim();
+                String storedResidentNum = userInfo[1].trim();
+
+                if (storedName.equals(deleteNum) && storedResidentNum.equals(deleteResidentName)) {
+                    deleted = true; // 삭제 플래그를 true로 설정하여 삭제 여부를 확인
+                    continue; // 삭제할 강좌 정보는 쓰지 않고 건너뜀
+                }
+
+                writer.write(line);
+                writer.newLine();
             }
 
-            writer.write(line);
-            writer.newLine();
+            writer.close();
+            reader.close();
+
+            if (deleted) {
+                // 기존 파일 삭제하고 임시 파일 이름 변경
+                inputFile.delete();
+                tempFile.renameTo(inputFile);
+                return true;
+            } else {
+                // 삭제할 강좌 정보가 없는 경우 임시 파일 삭제
+                tempFile.delete();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        writer.close();
-        reader.close();
-
-        if (deleted) {
-            // 기존 파일 삭제하고 임시 파일 이름 변경
-            inputFile.delete();
-            tempFile.renameTo(inputFile);
-            return true;
-        } else {
-            // 삭제할 강좌 정보가 없는 경우 임시 파일 삭제
-            tempFile.delete();
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-    return false;
+        return false;
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
