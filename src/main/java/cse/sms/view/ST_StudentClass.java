@@ -11,6 +11,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.*;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -78,8 +79,8 @@ public class ST_StudentClass extends javax.swing.JFrame {
                 String[] dataRow = temp.split(",");
                 if (dataRow[0].equals(jTable1.getValueAt(i, 0))) {  //선택한 강좌번호 = classopen 강좌번호
                     int currentstd = Integer.parseInt(dataRow[6]);
-                    dataRow[6] = Integer.toString(currentstd++);
-                    System.out.println(dataRow[6] +"!!!!!!!!!");
+                    currentstd++;
+                    dataRow[6] = Integer.toString(currentstd);
                 }
             }
         } catch (Exception ex) {
@@ -89,7 +90,7 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
     private void SaveStdclassInfo(int i) {    //학번, 이름, 수강 내역 저장
 
-        File file = new File("classopen.txt");
+        File file = new File("studentclasses.txt");
         try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "utf-8"))) {
             String stdnum = loginUser.getID();
             String name = loginUser.getName();
@@ -107,50 +108,47 @@ public class ST_StudentClass extends javax.swing.JFrame {
         }
     }
 
-    private void PrintStdInfo() {    //학생 수강 내역 띄우기
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        boolean tID = false;
-        String inputStr[] = new String[6];
+private void PrintStdInfo() {    //학생 수강 내역 띄우기
+    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+    boolean tID = false;
+    String inputStr[] = new String[6];
 
-        String file = "studentclasses.txt";
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
-            model.setNumRows(0);    //Row 0해서 리셋
-
-            String temp;
-            while ((temp = br.readLine()) != null) {
-                String dataRow[] = temp.split(",");
-                if (dataRow[0].equals(loginUser.getID())) { //id동일
-                    tID = true;
-                    inputStr[0] = dataRow[2];    //강좌번호
-                    inputStr[1] = dataRow[3];    //강좌명
-                    inputStr[2] = dataRow[4];    //학점
-                    inputStr[3] = dataRow[5];    //교수
-                    inputStr[4] = "";
-                    inputStr[5] = dataRow[6];    //설명
-
-                }
-            }
-        } catch (Exception ex) {
-            ex.getStackTrace();
-        }
-
-        if (tID) {
-            String file2 = "classopen.txt";
-            try (BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(file2), "UTF-8"))) {
-                String temp2;
-                while ((temp2 = br2.readLine()) != null) {
-                    String[] dataRow2 = temp2.split(",");
-                    if (dataRow2[0].equals(inputStr[0])) {
-                        inputStr[4] = dataRow2[4];
-                        model.addRow(inputStr);
+    String file = "studentclasses.txt";
+    try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
+        model.setRowCount(0);    // RowCount를 0으로 설정하여 기존 내용을 초기화
+        String temp;
+        while ((temp = br.readLine()) != null) {
+            String dataRow[] = temp.split(",");
+            if (dataRow[0].equals(loginUser.getID())) { // id 동일
+                tID = true;
+                inputStr[0] = dataRow[2];    // 강좌번호
+                inputStr[1] = dataRow[3];    // 강좌명
+                inputStr[2] = dataRow[4];    // 학점
+                inputStr[3] = dataRow[5];    // 교수
+                inputStr[4] = "";            // 최대/최소 인원
+                inputStr[5] = dataRow[6];    // 설명
+                
+                String classOpenFile = "classopen.txt";
+                try (BufferedReader br2 = new BufferedReader(new InputStreamReader(new FileInputStream(classOpenFile), "UTF-8"))) {
+                    String temp2;
+                    while ((temp2 = br2.readLine()) != null) {
+                        String[] dataRow2 = temp2.split(",");
+                        if (dataRow2[0].equals(inputStr[0])) {  // 강좌번호 ==
+                            inputStr[4] = dataRow2[4];   // 최대/최소 인원
+                            break;
+                        }
                     }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-            } catch (Exception ex) {
-                ex.getStackTrace();
+                
+                model.addRow(inputStr);
             }
         }
-
+    } catch (Exception ex) {
+        ex.printStackTrace();
     }
+}
 
     private boolean gradeCheck(int i) {     //학점 체크
         TableModel model = jTable1.getModel();
@@ -202,23 +200,24 @@ public class ST_StudentClass extends javax.swing.JFrame {
 
     private boolean maxPersonCheck(int i) {     //최대인원 수 체크
         TableModel model = jTable1.getModel();
-        int max =0,crrcount = 0;
+        int max = 0, crrcount = 0;
         String currentstd;    //선택한 강의의 수강인원
         String classnum = (String) model.getValueAt(i, 0);  //수강번호
-        String file = "classopen.txt";      //강좌번호0, 이름1, 학점2, 교수이름3, 인원수4, 설명5, 현재수강인원 6
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"))) {
+
+        String file2 = "classopen.txt";
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file2), "utf-8"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] dataRow = line.split(",");
-                String[] maxmin2 = dataRow[4].split("/");
-                max = Integer.parseInt(maxmin2[0]);
-                crrcount = Integer.parseInt(maxmin2[6]);
+                if (dataRow[0].equals(classnum)) {
+                    String[] maxmin2 = dataRow[4].split("/");
+                    max = Integer.parseInt(maxmin2[0]);
+                    crrcount = Integer.parseInt(dataRow[6]);
+                    if (crrcount > max) {     //현재 수강 인원>최대보다 많으면
+                        return true;
+                    }
+                }
             }
-            if(crrcount > max){     //현재 수강 인원>최대보다 많으면
-                return true;
-                
-            }
-
         } catch (IOException ex) {
             ex.getStackTrace();
         }

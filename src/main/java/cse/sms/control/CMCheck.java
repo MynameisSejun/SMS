@@ -24,8 +24,9 @@ public class CMCheck {
         }
         return isEmpty; 
     }
-      public boolean emptyCheck2(String num, String name,  String pname, String infor) { //정보 저장할 때 빈칸 체크할려고 만들긴 햇는데 안돌아가는듯
-        String[] check = {num, name, pname, infor};
+      public boolean emptyCheck2(String num, String name,  String major, String grade) { //정보 저장할 때 빈칸 체크할려고 만들긴 햇는데 안돌아가는듯
+        String[] check = {num, name, major, grade};
+
         boolean isEmpty = true;
         for(int i = 0; i < check.length; i++) {
             if(check[i].isEmpty()) {
