@@ -31,13 +31,14 @@ public class CM_ClassOpen extends javax.swing.JFrame {
      */
     public CM_ClassOpen() {
         initComponents();
-        setTitle("수업담당자 - 강의개설" + loginUser.getID());
+        setTitle("수업담당자 - 강의개설 " + loginUser.getID());
         setLocationRelativeTo(null);
         
         // 초기화하는 작업
         tableModel = new DefaultTableModel();
         tableModel.addColumn("강좌번호");
-        tableModel.addColumn("강의명");
+        tableModel.addColumn("강좌명");
+         tableModel.addColumn("교수명");
         tableModel.addColumn("학점");
         tableModel.addColumn("강좌계획내용");
         jTable2.setModel(tableModel);
@@ -83,6 +84,8 @@ public class CM_ClassOpen extends javax.swing.JFrame {
         mPeople = new javax.swing.JTextField();
         pName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        cName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,13 +108,13 @@ public class CM_ClassOpen extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "강의번호", "강의명", "학점", "강좌계획내용"
+                "강좌번호", "강좌명", "교수명", "학점", "강좌계획내용"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -129,6 +132,15 @@ public class CM_ClassOpen extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel3.setText("교수명");
 
+        jLabel5.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel5.setText("강의명");
+
+        cName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cNameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,27 +151,30 @@ public class CM_ClassOpen extends javax.swing.JFrame {
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 24, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(46, 46, 46)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cNum, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(mPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(mPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(jLabel5))
+                                .addGap(46, 46, 46)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cNum, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(39, 39, 39)
-                        .addComponent(classInfo)
-                        .addGap(48, 48, 48)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(classInfo)
+                                .addGap(48, 48, 48)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -167,28 +182,30 @@ public class CM_ClassOpen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(cNum, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(classInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(jButton2)
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cNum, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(cName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(mPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel4)))
-                        .addGap(57, 57, 57))))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(mPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))))
         );
 
         pack();
@@ -197,10 +214,10 @@ public class CM_ClassOpen extends javax.swing.JFrame {
     private void classInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classInfoActionPerformed
     String filePath = "classopen.txt";
     String classFilePath = "classes.txt";
-    ClassCourse classCourse = new ClassCourse(cNum.getText(), pName.getText(), mPeople.getText());
+    ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), pName.getText(), mPeople.getText());
     CMCheck ck = new CMCheck();
 
-    boolean emCheck = ck.emptyCheck2(cNum.getText(),  pName.getText(), mPeople.getText());
+    boolean emCheck = ck.emptyCheck2(cNum.getText(),  cName.getText(), pName.getText(), mPeople.getText());
 
     if (emCheck) {
         boolean classExists = false;
@@ -209,7 +226,7 @@ public class CM_ClassOpen extends javax.swing.JFrame {
         try (BufferedReader reader = new BufferedReader(new FileReader(classFilePath, StandardCharsets.UTF_8))) {
             while ((line = reader.readLine()) != null) {
                 String[] classInfo = line.split(",");
-                if (classInfo.length > 0 && classInfo[0].equals(cNum.getText())) {
+                if (classInfo.length > 0 && classInfo[0].equals(cNum.getText()) && classInfo.length > 0 && classInfo[0].equals(cName.getText()) && classInfo.length > 0 && classInfo[0].equals(pName.getText())) {
                     classExists = true;
                     break;
                 }
@@ -220,7 +237,7 @@ public class CM_ClassOpen extends javax.swing.JFrame {
 
         if (classExists) {
              try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), "UTF-8"))) {
-            String classInfo = classCourse.getNum() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
+            String classInfo = classCourse.getNum() + ","  + classCourse.getName() + "," + classCourse.getPName() + "," + classCourse.getInfor();
             writer.write(classInfo);
             writer.newLine();
             JOptionPane.showMessageDialog(null, "저장되었습니다!");
@@ -233,7 +250,7 @@ public class CM_ClassOpen extends javax.swing.JFrame {
             e.printStackTrace();
         }
         } else {
-            JOptionPane.showMessageDialog(null, "유효한 강의 번호가 아닙니다. 다른 강의 번호를 선택해주세요.");
+            JOptionPane.showMessageDialog(null, "유효한 강의가 아닙니다. 입력을 다시해주세요");
         }
     } else {
         JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
@@ -241,7 +258,7 @@ public class CM_ClassOpen extends javax.swing.JFrame {
     }//GEN-LAST:event_classInfoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // 뒤로 가기
+        // 뒤로 가기                                          
         CM_FirstPage cf = new CM_FirstPage();
         cf.setVisible(true);
         setVisible(false);
@@ -252,13 +269,19 @@ public class CM_ClassOpen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cNumActionPerformed
 
+    private void cNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cNameActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cName;
     private javax.swing.JTextField cNum;
     private javax.swing.JButton classInfo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField mPeople;

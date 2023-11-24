@@ -26,7 +26,7 @@ UserData loginUser = UserData.getInstance();
      */
     public CM_CourseRevise() {
         initComponents();
-        setTitle("수업담당자 - 강좌수정" + loginUser.getID());
+        setTitle("수업담당자 - 강좌수정 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -197,6 +197,9 @@ UserData loginUser = UserData.getInstance();
         boolean changed = changeCourseInfo(existingNum, existingName, newNumText, newNameText, newGradeText, newInfoText);
         if (changed) {
             JOptionPane.showMessageDialog(null, "강좌 정보가 수정되었습니다.");
+            dispose();
+            CM_FirstPage sf = new CM_FirstPage();
+            sf.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "강좌 정보를 찾을 수 없습니다.");
         }
@@ -217,15 +220,15 @@ public boolean changeCourseInfo(String existingNum, String existingName, String 
 
             while ((line = reader.readLine()) != null) {
                 String[] userInfo = line.split(",");
-                 if (userInfo.length == 6) {
+                 if (userInfo.length == 5) {
                 String storedNum = userInfo[0].trim();
                 String storedName = userInfo[1].trim();
-                String storedGrade = userInfo[2].trim();
-                String storedInfo = userInfo[5].trim();
+                String storedGrade = userInfo[3].trim();
+                String storedInfo = userInfo[4].trim();
 
         if (storedNum.equals(existingNum) && storedName.equals(existingName)) {
             // 기존 정보와 일치하는 학생 정보를 찾은 경우
-            line = newNum + "," + newName + "," + newGrade + "," + userInfo[3]+ "," + userInfo[4] + "," + newInfoText; // 강좌 정보 출력
+            line = newNum + "," + newName + "," + userInfo[2]+ ","+ newGrade + "," + newInfoText ; // 강좌 정보 출력
             changed = true; // 수정 플래그를 true로 설정하여 수정 여부를 확인
         }
     }
