@@ -254,7 +254,10 @@ if (emCheck) {
             String[] classInfo = line.split(",");
             if (classInfo.length > 2 && classInfo[0].equals(cNum.getText()) && classInfo[1].equals(cName.getText())) {
                 String creditValue = classInfo[3]; // 학점 정보
+                String MajorValue = classInfo[2]; // 학과 정보
                 classCourse.setCredit(creditValue); // ClassCourse 객체에 학점 설정
+                classCourse.setMajor(MajorValue); // ClassCourse 객체에 학점 설정
+
                 classExists = true;
                 break;
             }
@@ -265,7 +268,7 @@ if (emCheck) {
 
     if (classExists) {
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), "UTF-8"))) {
-            String classInfoData = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getCredit() + ","+ classCourse.getPName() + ","  + classCourse.getMpeople() + "," + classCourse.getInfor() + ","  + "0" ;
+            String classInfoData = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getCredit() + ","+ classCourse.getMajor() + "," + classCourse.getPName() + ","  + classCourse.getMpeople() + "," + classCourse.getInfor() + ","  + "-" ;
             writer.write(classInfoData);
             writer.newLine();
             JOptionPane.showMessageDialog(null, "저장되었습니다!");
