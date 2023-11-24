@@ -33,7 +33,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
     
     private void fillTable() {
         try {
-            File file = new File("classes.txt");
+            File file = new File("classopen.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
             String line;
             String[] data;
@@ -43,7 +43,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
 
             while ((line = br.readLine()) != null) {
                 data = line.split(",");
-                if (data[2].equals(loginUser.getName())) {
+                if (data[3].equals(loginUser.getName())) {
                     model.addRow(new Object[]{data[0], data[1]});
                 }
             }
