@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import cse.sms.control.UserData;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 
 /**
  *
@@ -26,7 +28,7 @@ public class CM_CourseOpen extends javax.swing.JFrame {
      */
     public CM_CourseOpen() {
         initComponents();
-        setTitle("강좌개설" + loginUser.getID());
+        setTitle("수업담당자 - 강좌개설 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -52,6 +54,9 @@ public class CM_CourseOpen extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        cpName = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,56 +121,78 @@ public class CM_CourseOpen extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        jLabel6.setText("담당교수");
+
+        jLabel7.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
+        jLabel7.setText("강좌 등록");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addContainerGap(88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cInfor, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cName, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cInfor)
+                                    .addComponent(cpName)
+                                    .addComponent(cName)
+                                    .addComponent(cNum)
+                                    .addComponent(cGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel7)))
+                        .addGap(59, 59, 59))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(cNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))
-                            .addGap(20, 20, 20)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)))
-                        .addComponent(jLabel1))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                    .addComponent(cNum, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cpName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cInfor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(50, 50, 50)
+                .addGap(11, 11, 11)
                 .addComponent(jButton2)
-                .addGap(19, 19, 19))
+                .addContainerGap())
         );
 
         pack();
@@ -192,38 +219,40 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          String filePath = "classes.txt";
-        ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), cGrade.getText(), cInfor.getText());
-        CMCheck ck = new CMCheck();
+
+        String filePath = "classes.txt";
         
-        boolean idCheck = true;
-        boolean emCheck = true;
-        
-        emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), cGrade.getText(), cInfor.getText());
-        idCheck = ck.equalCehck2(filePath, cNum.getText());
-        
-       if(emCheck) {
-            if(idCheck) {
-                try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-//                    String cNum = classCourse.cNum();
-                    String classInfo = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
-                    //if (check == false) 
-                    writer.write(classInfo);
-                    writer.newLine();
-                    JOptionPane.showMessageDialog(null, "저장되었습니다!");
-                    //else if(check == true) 빈칸 있음
-                    dispose();
-                    SM_FirstPage sf = new SM_FirstPage();
-                    sf.setVisible(true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "중복된 강좌 번호가 있습니다.");
+    ClassCourse classCourse = new ClassCourse(cNum.getText(), cName.getText(), cpName.getText(), cGrade.getText(), cInfor.getText());
+    CMCheck ck = new CMCheck();
+    
+    boolean idCheck = true;
+    boolean emCheck = true;
+    
+    emCheck = ck.emptyCheck2(cNum.getText(), cName.getText(), cpName.getText(),   cGrade.getText(), cInfor.getText());
+
+   
+    idCheck = ck.equalCehck2(filePath, cNum.getText()); // 문제
+
+    
+    if (emCheck) {
+        if (idCheck) {
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filePath, true), "UTF-8"))) {
+                String classInfo = classCourse.getNum() + "," + classCourse.getName() + "," + classCourse.getPName() + "," + classCourse.getGrade() + "," + classCourse.getInfor();
+                bw.write(classInfo);
+                bw.newLine();
+                JOptionPane.showMessageDialog(null, "저장되었습니다!");
+                dispose();
+                CM_FirstPage sf = new CM_FirstPage();
+                sf.setVisible(true);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        }else {
-            JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
+        } else {
+            JOptionPane.showMessageDialog(null, "중복된 강좌 번호가 있습니다.");
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "빈칸이 있습니다. 마저 입력해주세요.");
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -231,6 +260,7 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     private javax.swing.JTextField cInfor;
     private javax.swing.JTextField cName;
     private javax.swing.JTextField cNum;
+    private javax.swing.JTextField cpName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -238,6 +268,8 @@ public class CM_CourseOpen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

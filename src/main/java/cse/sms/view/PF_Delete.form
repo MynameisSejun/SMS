@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
@@ -35,15 +35,10 @@
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="sNum" min="-2" pref="72" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="sjNum" min="-2" pref="72" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="pNum" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Component id="sjNum" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -66,7 +61,7 @@
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="sNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pNum" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -84,17 +79,29 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JTextField" name="pNum">
+    </Component>
+    <Component class="javax.swing.JTextField" name="sjNum">
+    </Component>
+    <Component class="javax.swing.JButton" name="jButt_Back">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xb4a4;&#xb85c;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButt_BackActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="20" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#xd559;&#xc0dd; &#xc815;&#xbcf4; &#xc0ad;&#xc81c;"/>
+        <Property name="text" type="java.lang.String" value="&#xad50;&#xc218; &#xc815;&#xbcf4; &#xc0ad;&#xc81c;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xd559;&#xbc88;:"/>
+        <Property name="text" type="java.lang.String" value="&#xad50;&#xc218;&#xbc88;&#xd638;:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -108,18 +115,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeleteActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="sNum">
-    </Component>
-    <Component class="javax.swing.JTextField" name="sjNum">
-    </Component>
-    <Component class="javax.swing.JButton" name="jButt_Back">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#xb4a4;&#xb85c;"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButt_BackActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -10,23 +10,24 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author suk22
  */
-public class ST_Query extends javax.swing.JFrame {
+public class PF_Query extends javax.swing.JFrame {
+
     UserData loginUser = UserData.getInstance();
-//    private static final String filePath = "studentInfo.txt";
+
     /**
-     * Creates new form StudentQuery
+     * Creates new form PF_Query
      */
-    public ST_Query() {
+    public PF_Query() {
         initComponents();
-        setTitle("학생 - 학생조회 "+ loginUser.getID());
+        setTitle("교수 - 교수정보 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,26 +37,15 @@ public class ST_Query extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        sName = new javax.swing.JTextField();
+        jButtonQuery = new javax.swing.JButton();
+        pNum = new javax.swing.JTextField();
+        jButt_Back = new javax.swing.JButton();
+        pName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButtonQuery = new javax.swing.JButton();
-        sNum = new javax.swing.JTextField();
-        jButt_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        sName.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jLabel1.setText("학번:");
-
-        jLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jLabel2.setText("이름:");
-
-        jLabel3.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
-        jLabel3.setText("학생 정보 조회");
 
         jButtonQuery.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jButtonQuery.setText("조회");
@@ -65,7 +55,7 @@ public class ST_Query extends javax.swing.JFrame {
             }
         });
 
-        sNum.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        pNum.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
         jButt_Back.setText("뒤로");
         jButt_Back.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +63,17 @@ public class ST_Query extends javax.swing.JFrame {
                 jButt_BackActionPerformed(evt);
             }
         });
+
+        pName.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel1.setText("교수번호:");
+
+        jLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel2.setText("이름:");
+
+        jLabel3.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
+        jLabel3.setText("교수 정보 조회");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,19 +86,17 @@ public class ST_Query extends javax.swing.JFrame {
                 .addComponent(jButtonQuery)
                 .addGap(18, 18, 18))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(93, 93, 93)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sNum)
-                            .addComponent(sName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(132, 132, 132)
-                        .addComponent(jLabel3)))
+                            .addComponent(pNum)
+                            .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel3))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -108,10 +107,10 @@ public class ST_Query extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(sNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,46 +124,49 @@ public class ST_Query extends javax.swing.JFrame {
 
     private void jButtonQueryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonQueryActionPerformed
         // TODO add your handling code here:
-        String studentId = sNum.getText(); // 사용자가 입력한 학번
-     String name = sName.getText(); // 사용자가 입력한 이름
+        String professorId = pNum.getText(); // 사용자가 입력한 학번
+        String name = pName.getText(); // 사용자가 입력한 이름
 
-        String studentInfo = queryStudentInfo(studentId, name);
-    if (studentInfo != null) { // 학생 정보가 존재하는 경우
-        JOptionPane.showMessageDialog(null, "학생 정보: \n" + studentInfo); // 학생 정보를 출력한다
-    } 
-    else {
-        JOptionPane.showMessageDialog(null, "학생 정보를 찾을 수 없습니다.");
+        String studentInfo = queryStudentInfo(professorId, name);
+        if (studentInfo != null) { // 교수 정보가 존재하는 경우
+            JOptionPane.showMessageDialog(null, "교수 정보: \n" + studentInfo); // 교수 정보를 출력한다
+        } else {
+            JOptionPane.showMessageDialog(null, "교수 정보를 찾을 수 없습니다.");
         }
+        SM_ProfessorMenu pf = new SM_ProfessorMenu();
+        pf.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonQueryActionPerformed
 
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
         // TODO add your handling code here:
-        SM_StudentMenu pf = new SM_StudentMenu();
+        SM_ProfessorMenu pf = new SM_ProfessorMenu();
         pf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
-public String queryStudentInfo(String studentId, String name) {
-   String filePath = "studentInfo.txt";
-   try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"))) {
-        String line;
-        while ((line = br.readLine()) != null) {
-            String[] userInfo = line.split(",");
-            String storedId = userInfo[0].trim(); // 앞뒤 공백 제거
-            String storedName = userInfo[2].trim(); // 문제점!!!
-            if (storedId.equals(studentId) && storedName.equals(name)) {
-                return line; // 학생 정보를 반환함
+    public String queryStudentInfo(String studentId, String name) {
+        String filePath = "professorInfo.txt";
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] userInfo = line.split(",");
+                String storedId = userInfo[0].trim(); // 앞뒤 공백 제거
+                String storedName = userInfo[2].trim(); // 문제점!!!
+                if (storedId.equals(studentId) && storedName.equals(name)) {
+                    return line; // 교수 정보를 반환함
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
 
-    return null; // 학생 정보를 찾지 못한 경우
-}
+        return null; // 교수 정보를 찾지 못한 경우
+    }
 
     /**
      * @param args the command line arguments
      */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButt_Back;
@@ -172,7 +174,7 @@ public String queryStudentInfo(String studentId, String name) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField sName;
-    private javax.swing.JTextField sNum;
+    private javax.swing.JTextField pName;
+    private javax.swing.JTextField pNum;
     // End of variables declaration//GEN-END:variables
 }

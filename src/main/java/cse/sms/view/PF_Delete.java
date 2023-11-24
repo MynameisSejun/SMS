@@ -16,18 +16,21 @@ import java.io.OutputStreamWriter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import javax.swing.JOptionPane;
+
 /**
  *
- * @author 송녕경
+ * @author suk22
  */
-public class ST_Delete extends javax.swing.JFrame {
+public class PF_Delete extends javax.swing.JFrame {
+
     UserData loginUser = UserData.getInstance();
+
     /**
-     * Creates new form ST_delete
+     * Creates new form PF_Delete
      */
-    public ST_Delete() {
+    public PF_Delete() {
         initComponents();
-        setTitle("학생 - 학생삭제 " + loginUser.getID());
+        setTitle("교수 - 교수삭제 " + loginUser.getID());
         setLocationRelativeTo(null);
     }
 
@@ -40,20 +43,27 @@ public class ST_Delete extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pNum = new javax.swing.JTextField();
+        sjNum = new javax.swing.JTextField();
+        jButt_Back = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButtonDelete = new javax.swing.JButton();
-        sNum = new javax.swing.JTextField();
-        sjNum = new javax.swing.JTextField();
-        jButt_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
-        jLabel1.setText("학생 정보 삭제");
+        jButt_Back.setText("뒤로");
+        jButt_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_BackActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("학번:");
+        jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 20)); // NOI18N
+        jLabel1.setText("교수 정보 삭제");
+
+        jLabel2.setText("교수번호:");
 
         jLabel3.setText("주민등록번호:");
 
@@ -61,13 +71,6 @@ public class ST_Delete extends javax.swing.JFrame {
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDeleteActionPerformed(evt);
-            }
-        });
-
-        jButt_Back.setText("뒤로");
-        jButt_Back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButt_BackActionPerformed(evt);
             }
         });
 
@@ -88,9 +91,9 @@ public class ST_Delete extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
-                                .addComponent(sNum, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(pNum, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(11, 11, 11)
                                 .addComponent(sjNum, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(138, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -108,7 +111,7 @@ public class ST_Delete extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(sNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -123,76 +126,80 @@ public class ST_Delete extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        // TODO add your handling code here:
-         String deleteName = sNum.getText(); // 사용자가 입력한 삭제할 학생 이름
-    String deleteResidentNum = sjNum.getText(); // 사용자가 입력한 삭제할 학생 주민등록번호
-
-    boolean deleted = deleteStudentInfo(deleteName, deleteResidentNum);
-    if (deleted) {
-        JOptionPane.showMessageDialog(null, "학생 정보가 삭제되었습니다.");
-    } else {
-        JOptionPane.showMessageDialog(null, "학생 정보를 찾을 수 없습니다.");
-    }
-    }//GEN-LAST:event_jButtonDeleteActionPerformed
-
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
         // TODO add your handling code here:
-        SM_StudentMenu pf = new SM_StudentMenu();
+        // TODO add your handling code here:
+        SM_ProfessorMenu pf = new SM_ProfessorMenu();
         pf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
 
-   public boolean deleteStudentInfo(String deleteName, String deleteResidentNum) {
-    String filePath = "studentInfo.txt";
-    File inputFile = new File(filePath);
-    File tempFile = new File("temp.txt");
-    BufferedReader reader;
-    BufferedWriter writer;
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        // TODO add your handling code here:
+        String deleteName = pNum.getText(); // 사용자가 입력한 삭제할 교수이름
+        String deleteResidentNum = sjNum.getText(); // 사용자가 입력한 삭제할 교수 주민등록번호
 
-    try {
-        reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
-        writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+        boolean deleted = deleteStudentInfo(deleteName, deleteResidentNum);
+        if (deleted) {
+            JOptionPane.showMessageDialog(null, "교수 정보가 삭제되었습니다.");
+            SM_ProfessorMenu pf = new SM_ProfessorMenu();
+            pf.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "교수 정보를 찾을 수 없습니다.");
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
-        String line;
-        boolean deleted = false; // 삭제 여부 확인을 위한 플래그
+    public boolean deleteStudentInfo(String deleteName, String deleteResidentNum) {
+        String filePath = "professorInfo.txt";
+        File inputFile = new File(filePath);
+        File tempFile = new File("temp.txt");
+        BufferedReader reader;
+        BufferedWriter writer;
 
-        while ((line = reader.readLine()) != null) {
-            String[] userInfo = line.split(",");
-            String storedName = userInfo[0].trim();
-            String storedResidentNum = userInfo[4].trim();
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
 
-            if (storedName.equals(deleteName) && storedResidentNum.equals(deleteResidentNum)) {
-                deleted = true; // 삭제 플래그를 true로 설정하여 삭제 여부를 확인
-                continue; // 삭제할 학생 정보는 쓰지 않고 건너뜀
+            String line;
+            boolean deleted = false; // 삭제 여부 확인을 위한 플래그
+
+            while ((line = reader.readLine()) != null) {
+                String[] userInfo = line.split(",");
+                String storedName = userInfo[0].trim();
+                String storedResidentNum = userInfo[4].trim();
+
+                if (storedName.equals(deleteName) && storedResidentNum.equals(deleteResidentNum)) {
+                    deleted = true; // 삭제 플래그를 true로 설정하여 삭제 여부를 확인
+                    continue; // 삭제할 교수 정보는 쓰지 않고 건너뜀
+                }
+
+                writer.write(line);
+                writer.newLine();
             }
 
-            writer.write(line);
-            writer.newLine();
+            writer.close();
+            reader.close();
+
+            if (deleted) {
+                // 기존 파일 삭제하고 임시 파일 이름 변경
+                inputFile.delete();
+                tempFile.renameTo(inputFile);
+                return true;
+            } else {
+                // 삭제할 교수 정보가 없는 경우 임시 파일 삭제
+                tempFile.delete();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        writer.close();
-        reader.close();
-
-        if (deleted) {
-            // 기존 파일 삭제하고 임시 파일 이름 변경
-            inputFile.delete();
-            tempFile.renameTo(inputFile);
-            return true;
-        } else {
-            // 삭제할 학생 정보가 없는 경우 임시 파일 삭제
-            tempFile.delete();
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
+        return false;
     }
 
-    return false;
-}
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButt_Back;
@@ -200,7 +207,7 @@ public class ST_Delete extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField sNum;
+    private javax.swing.JTextField pNum;
     private javax.swing.JTextField sjNum;
     // End of variables declaration//GEN-END:variables
 }

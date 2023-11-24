@@ -4,10 +4,13 @@
  */
 package cse.sms.view;
 
+import cse.sms.control.UserData;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,14 +23,16 @@ public class CM_BillIssue extends javax.swing.JFrame {
 
     private static String stdname;
     private static String stdnum;
+    UserData loginUser = UserData.getInstance();
 
     /**
      * Creates new form CM_BillIssue
      */
     public CM_BillIssue() {
         initComponents();
-        setTitle("수강료 청구서 발급");
+        setTitle("수강료 청구서 발급" + loginUser.getID() + loginUser.getName());
         setLocationRelativeTo(null);
+
 
     }
 
@@ -162,9 +167,8 @@ public class CM_BillIssue extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int check = 0;
-        try {
             File file = new File("studentInfo.txt");
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"))) {
             String temp;
             while ((temp = br.readLine()) != null) {
                 String[] dataRow = temp.split(",");
