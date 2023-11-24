@@ -44,9 +44,9 @@ UserData loginUser = UserData.getInstance();
         jLabel2 = new javax.swing.JLabel();
         newName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        newGrade = new javax.swing.JTextField();
+        newMajor = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        newInfo = new javax.swing.JTextField();
+        newGrade = new javax.swing.JTextField();
         jButtonInfo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cNum = new javax.swing.JTextField();
@@ -65,10 +65,10 @@ UserData loginUser = UserData.getInstance();
         jLabel2.setText("강좌명");
 
         jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel3.setText("학점");
+        jLabel3.setText("학과");
 
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel4.setText("설명");
+        jLabel4.setText("학점");
 
         jButtonInfo.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jButtonInfo.setText("등록");
@@ -126,8 +126,8 @@ UserData loginUser = UserData.getInstance();
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(newName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(newGrade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(newInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(newMajor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newGrade, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -162,11 +162,11 @@ UserData loginUser = UserData.getInstance();
                                     .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(newGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
                                 .addGap(25, 25, 25)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(newInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(28, 28, 28)
                         .addComponent(jButton2)
@@ -191,10 +191,10 @@ UserData loginUser = UserData.getInstance();
         String existingName = cName.getText(); // 기존 강좌명
         String newNumText = newNum.getText(); // 변경할 학번
         String newNameText = newName.getText(); // 변경할 이름
+        String newMajorText = newMajor.getText(); // 변경할 학과
         String newGradeText = newGrade.getText(); // 변경할 학점
-        String newInfoText = newInfo.getText(); // 변경할 정보
 
-        boolean changed = changeCourseInfo(existingNum, existingName, newNumText, newNameText, newGradeText, newInfoText);
+        boolean changed = changeCourseInfo(existingNum, existingName, newNumText, newNameText, newMajorText, newGradeText);
         if (changed) {
             JOptionPane.showMessageDialog(null, "강좌 정보가 수정되었습니다.");
             dispose();
@@ -204,7 +204,7 @@ UserData loginUser = UserData.getInstance();
             JOptionPane.showMessageDialog(null, "강좌 정보를 찾을 수 없습니다.");
         }
     }//GEN-LAST:event_jButtonInfoActionPerformed
-public boolean changeCourseInfo(String existingNum, String existingName, String newNum, String newName, String newGrade, String newInfoText) {
+public boolean changeCourseInfo(String existingNum, String existingName, String newNum, String newName, String newMajor, String newGrade) {
         String filePath = "classes.txt"; 
         File inputFile = new File(filePath);
         File tempFile = new File("temp.txt");
@@ -220,15 +220,15 @@ public boolean changeCourseInfo(String existingNum, String existingName, String 
 
             while ((line = reader.readLine()) != null) {
                 String[] userInfo = line.split(",");
-                 if (userInfo.length == 5) {
+                 if (userInfo.length == 4) {
                 String storedNum = userInfo[0].trim();
                 String storedName = userInfo[1].trim();
+                String storedMajor = userInfo[2].trim();
                 String storedGrade = userInfo[3].trim();
-                String storedInfo = userInfo[4].trim();
 
         if (storedNum.equals(existingNum) && storedName.equals(existingName)) {
             // 기존 정보와 일치하는 학생 정보를 찾은 경우
-            line = newNum + "," + newName + "," + userInfo[2]+ ","+ newGrade + "," + newInfoText ; // 강좌 정보 출력
+            line = newNum + "," + newName + "," + newMajor + "," + newGrade ; // 강좌 정보 출력
             changed = true; // 수정 플래그를 true로 설정하여 수정 여부를 확인
         }
     }
@@ -278,7 +278,7 @@ public boolean changeCourseInfo(String existingNum, String existingName, String 
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField newGrade;
-    private javax.swing.JTextField newInfo;
+    private javax.swing.JTextField newMajor;
     private javax.swing.JTextField newName;
     private javax.swing.JTextField newNum;
     // End of variables declaration//GEN-END:variables
