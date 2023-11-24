@@ -181,12 +181,7 @@ public class PF_Info extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_BackActionPerformed
-        // TODO add your handling code here:
-<<<<<<< HEAD
-        SM_FirstPage pf = new SM_FirstPage();
-=======
         SM_ProfessorMenu pf = new SM_ProfessorMenu();
->>>>>>> 6c449c058d4dffc0abe4696ef5f006ff5c972a8b
         pf.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButt_BackActionPerformed
