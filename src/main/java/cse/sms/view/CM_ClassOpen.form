@@ -68,6 +68,7 @@
                                   </Group>
                               </Group>
                           </Group>
+
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -172,6 +173,11 @@
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

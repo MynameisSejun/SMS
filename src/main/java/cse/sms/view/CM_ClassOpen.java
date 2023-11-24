@@ -112,10 +112,10 @@ public class CM_ClassOpen extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
                 "강좌번호", "강좌명", "담당 학과", "학점"
