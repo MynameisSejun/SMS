@@ -17,23 +17,24 @@ public class ClassCourse {
     private String pname;
     private String grade;
     private String infor;
+    private String major;
+    private String mpeople;
+    private String credit;
 
-    public ClassCourse(String num, String name, String pname, String grade, String infor) {
+    public ClassCourse(String num, String name, String pname, String mpeople, String infor) {
         this.num = num;
         this.name = name;
         this.pname = pname;
+        this.mpeople = mpeople;
+        this.infor = infor;
+    }
+
+    public ClassCourse(String num, String name, String major, String grade) {
+        this.num = num;
+        this.name = name;
         this.grade = grade;
-        this.infor = infor;
+        this.major = major;
     }
-
-    public ClassCourse(String num, String name, String pname, String infor) {
-        this.num = num;
-        this.name = name;
-        this.pname = pname;
-        this.infor = infor;
-    }
-    
-    
     
     public String getNum() {
         return num;
@@ -54,5 +55,16 @@ public class ClassCourse {
     public String getInfor() {
         return infor;
     }
-    
+        public String getMajor() {
+        return major;
+    }
+      public String getMpeople() {
+        return mpeople;
+    }    
+        public void setCredit(String credit) {
+        this.credit = credit;
+    }
+            public String getCredit() {
+        return credit;
+    }
 }
