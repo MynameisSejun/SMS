@@ -64,6 +64,9 @@ public class ClassCourse {
         public void setCredit(String credit) {
         this.credit = credit;
     }
+        public void setMajor(String Major) {
+        this.major = Major;
+    }
             public String getCredit() {
         return credit;
     }

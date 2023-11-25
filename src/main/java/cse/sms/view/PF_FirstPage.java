@@ -43,7 +43,7 @@ public class PF_FirstPage extends javax.swing.JFrame {
 
             while ((line = br.readLine()) != null) {
                 data = line.split(",");
-                if (data[2].equals(loginUser.getName())) {
+                if (data[4].equals(loginUser.getName())) {
                     model.addRow(new Object[]{data[0], data[1]});
                 }
             }
