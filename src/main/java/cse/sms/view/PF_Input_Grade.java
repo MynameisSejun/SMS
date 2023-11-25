@@ -90,6 +90,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
                 if (data.length >= 2 && data[0].equals(studentNumber)&&data[3].equals(lectureName)) {
                     data[8] = newGrade; // 성적 업데이트
                     line = String.join(",", data);
+                    
                 }
                 lines.add(line);
             }
