@@ -87,7 +87,7 @@ public class PF_Input_Grade extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 
-                if (data.length >= 2 && data[0].equals(studentNumber)) {
+                if (data.length >= 2 && data[0].equals(studentNumber)&&data[3].equals(lectureName)) {
                     data[8] = newGrade; // 성적 업데이트
                     line = String.join(",", data);
                 }
