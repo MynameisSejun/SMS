@@ -5,6 +5,7 @@
 package cse.sms.view;
 
 import cse.sms.control.MCheck;
+import cse.sms.control.UserData;
 import cse.sms.model.ClassManager;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,12 +17,15 @@ import javax.swing.JOptionPane;
  * @author 915
  */
 public class CM_Info extends javax.swing.JFrame {
-
+    
+    UserData loginUser = UserData.getInstance();
     /**
      * Creates new form CM_Info
      */
     public CM_Info() {
         initComponents();
+        setTitle("수업관리자 - 메뉴 - 등록 " + loginUser.getID());
+	setLocationRelativeTo(null);
     }
 
     /**
