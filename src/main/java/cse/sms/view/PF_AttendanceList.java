@@ -36,7 +36,7 @@ public class PF_AttendanceList extends javax.swing.JFrame {
         this.lectureNumber = lectureNumber;
         this.lectureName = lectureName;
         initComponents();
-        setTitle("교수 - 수강생 목록 " + loginUser.getID() + " " + UserData.getName());
+        setTitle("교수 - 수강생 목록 - " + lectureName+" "+ loginUser.getID() + " " + UserData.getName());
         setLocationRelativeTo(null);
         fillTable(lectureNumber); // 이 부분이 추가되었습니다.
         // 이제 강의 번호와 강의명을 사용하여 수강생 목록을 불러올 수 있습니다.
